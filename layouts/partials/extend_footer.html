@@ -143,6 +143,21 @@
                 }
             });
         }
+
+        // 为任务列表 checkbox 添加 aria-label (无障碍性优化)
+        const taskCheckboxes = document.querySelectorAll('.post-content input[type="checkbox"][disabled]');
+        taskCheckboxes.forEach(function (checkbox) {
+            const listItem = checkbox.parentElement;
+            if (listItem && listItem.tagName === 'LI') {
+                // 获取列表项的文本内容（去除 checkbox 本身）
+                const textContent = listItem.textContent.trim();
+                if (textContent) {
+                    checkbox.setAttribute('aria-label', textContent);
+                    checkbox.setAttribute('role', 'checkbox');
+                    checkbox.setAttribute('aria-checked', checkbox.checked ? 'true' : 'false');
+                }
+            }
+        });
     });
 </script>
 
