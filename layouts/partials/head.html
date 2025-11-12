@@ -74,7 +74,7 @@
 {{- if .IsHome }}
 {{- with site.Params.profileMode }}
 {{- if .imageUrl }}
-<link rel="preload" as="image" href="{{ .imageUrl | absURL }}">
+<link rel="preload" as="image" href="{{ .imageUrl | absURL }}" fetchpriority="high">
 {{- end }}
 {{- end }}
 {{- end }}
