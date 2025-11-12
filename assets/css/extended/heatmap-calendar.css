@@ -1,0 +1,551 @@
+/**
+ * GitHub 风格贡献热力图样式
+ * 响应式设计,支持亮色/暗色主题
+ */
+
+/* ============ 容器样式 ============ */
+.heatmap-section {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: var(--entry, #fff);
+  border-radius: 12px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+/* 移除悬停时的阴影效果，避免在最后一列产生视觉干扰 */
+/* .heatmap-section:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+} */
+
+/* ============ 标题样式 ============ */
+.heatmap-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.heatmap-header h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--content, #000);
+}
+
+.heatmap-subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--secondary, #666);
+  opacity: 0.8;
+}
+
+/* ============ 容器布局 ============ */
+.heatmap-container {
+  min-height: 160px;
+  /* 预留固定高度防止布局偏移 (CLS优化): 7行×14px + 间距6×2px + padding 32px = ~160px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0;
+  /* 隐藏滚动条但保持滚动功能 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+/* 隐藏 Webkit 浏览器的滚动条 */
+.heatmap-container::-webkit-scrollbar {
+  display: none;
+}
+
+.heatmap-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ============ 加载和错误状态 ============ */
+.heatmap-loading {
+  color: var(--secondary, #666);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.heatmap-error {
+  padding: 1rem;
+  background: rgba(255, 193, 7, 0.1);
+  border-left: 4px solid #ffc107;
+  border-radius: 4px;
+  color: #ff6b6b;
+  font-size: 0.875rem;
+}
+
+.heatmap-empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--secondary, #666);
+  font-size: 0.875rem;
+}
+
+/* ============ 星期标签 ============ */
+.heatmap-weekdays {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-right: 8px;
+  font-size: 0.75rem;
+  color: var(--secondary, #666);
+}
+
+.heatmap-weekday {
+  text-align: right;
+}
+
+.heatmap-weekday-placeholder {
+  visibility: hidden;
+}
+
+/* ============ 网格布局 ============ */
+.heatmap-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 12px);
+  gap: 2px;
+  padding: 0;
+}
+
+/* ============ 单元格样式 ============ */
+.heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(27, 31, 35, 0.06);
+}
+
+.heatmap-cell.out-of-range {
+  background-color: transparent !important;
+  border-color: transparent;
+  cursor: default;
+}
+
+.heatmap-cell:not(.out-of-range):hover {
+  transform: scale(1.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  position: relative;
+}
+
+/* ============ 图例样式 ============ */
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--secondary, #666);
+}
+
+.heatmap-legend-label {
+  margin: 0 4px;
+}
+
+.heatmap-legend-item {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(27, 31, 35, 0.06);
+  cursor: help;
+}
+
+/* ============ 提示框样式 ============ */
+.heatmap-tooltip {
+  position: fixed;
+  background: var(--entry, #fff);
+  color: var(--content, #000);
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.1));
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  pointer-events: none;
+  max-width: 250px;
+}
+
+.heatmap-tooltip.below {
+  /* 当提示框在下方时的样式调整 */
+}
+
+.tooltip-date {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--content, #000);
+  border: none !important;
+}
+
+.tooltip-count {
+  color: var(--secondary, #666);
+  margin-bottom: 0.5rem;
+  border-bottom: none !important;
+}
+
+.tooltip-titles {
+  /* 移除所有边框 */
+  border: none !important;
+  border-top: none !important;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tooltip-title {
+  color: var(--content, #000);
+  margin: 0.25rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none !important;
+}
+
+.tooltip-more {
+  color: var(--secondary, #666);
+  font-style: italic;
+  margin-top: 0.25rem;
+  border: none !important;
+}
+
+/* ============ Modal 样式 ============ */
+.heatmap-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--entry, #fff);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  /* 移除底部边框 */
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--content, #000);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--secondary, #666);
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--content, #000);
+}
+
+.modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(80vh - 80px);
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-list li {
+  margin: 0.75rem 0;
+}
+
+.post-list a {
+  color: var(--primary, #0969da);
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.post-list a:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--primary, #0969da);
+  transform: translateX(4px);
+}
+
+/* ============ 暗色主题适配 ============ */
+body.dark .heatmap-section {
+  background: var(--entry, #1e1e1e);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .heatmap-header h3 {
+  color: var(--content, #fff);
+}
+
+body.dark .heatmap-subtitle,
+body.dark .heatmap-loading,
+body.dark .heatmap-empty {
+  color: var(--secondary, #aaa);
+}
+
+body.dark .heatmap-error {
+  background: rgba(255, 193, 7, 0.15);
+  border-left-color: #ffb700;
+  color: #ff9a76;
+}
+
+body.dark .heatmap-cell {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark .heatmap-tooltip {
+  background: #2d333b;
+  border-color: #444c56;
+  color: #f0f6fc;
+}
+
+body.dark .tooltip-date {
+  color: #f0f6fc;
+}
+
+body.dark .tooltip-count,
+body.dark .tooltip-more {
+  color: #adbac7;
+}
+
+body.dark .tooltip-title {
+  color: #f0f6fc;
+}
+
+/* 暗色模式下的 tooltip-titles 不需要边框设置（已在亮色主题中移除） */
+
+body.dark .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark .modal-content {
+  background: #2d333b;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* 暗色模式下的 modal-header 不需要边框设置（已在亮色主题中移除） */
+
+body.dark .modal-header h3 {
+  color: #f0f6fc;
+}
+
+body.dark .modal-close {
+  color: #adbac7;
+}
+
+body.dark .modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f0f6fc;
+}
+
+body.dark .post-list a {
+  color: #539bf5;
+}
+
+body.dark .post-list a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #539bf5;
+}
+
+/* ============ 响应式设计 ============ */
+@media (max-width: 768px) {
+  .heatmap-section {
+    padding: 1.5rem 1rem;
+    margin: 2rem 0;
+  }
+
+  .heatmap-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .heatmap-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .heatmap-container {
+    padding: 0.5rem 0;
+  }
+
+  .heatmap-grid {
+    grid-template-rows: repeat(7, 10px);
+    gap: 1px;
+  }
+
+  .heatmap-cell {
+    width: 10px;
+    height: 10px;
+  }
+
+  .heatmap-legend-item {
+    width: 10px;
+    height: 10px;
+  }
+
+  .heatmap-weekdays {
+    gap: 1px;
+  }
+
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+    max-height: calc(90vh - 60px);
+  }
+}
+
+@media (max-width: 480px) {
+  .heatmap-section {
+    padding: 1rem;
+  }
+
+  .heatmap-header {
+    margin-bottom: 1rem;
+  }
+
+  .heatmap-grid {
+    grid-template-rows: repeat(7, 8px);
+  }
+
+  .heatmap-cell {
+    width: 8px;
+    height: 8px;
+  }
+
+  .heatmap-legend {
+    font-size: 0.7rem;
+    gap: 3px;
+  }
+
+  .heatmap-legend-item {
+    width: 8px;
+    height: 8px;
+  }
+
+  .heatmap-tooltip {
+    max-width: 200px;
+    padding: 0.5rem;
+  }
+}
+
+/* ============ 打印样式 ============ */
+@media print {
+  .heatmap-section {
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+
+  .heatmap-loading,
+  .heatmap-error {
+    display: none;
+  }
+
+  .heatmap-tooltip,
+  .heatmap-modal {
+    display: none !important;
+  }
+}
+
+/* ============ 无障碍支持 ============ */
+.heatmap-cell:focus {
+  outline: 2px solid var(--primary, #0969da);
+  outline-offset: 2px;
+}
+
+.modal-close:focus {
+  outline: 2px solid var(--primary, #0969da);
+  outline-offset: 2px;
+}
+
+/* 减少动画(用户偏好设置) */
+@media (prefers-reduced-motion: reduce) {
+  .heatmap-cell,
+  .heatmap-modal,
+  .modal-content,
+  .post-list a {
+    animation: none;
+    transition: none;
+  }
+}

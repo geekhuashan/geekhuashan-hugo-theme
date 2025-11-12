@@ -1,0 +1,11 @@
+<!-- 
+  按钮短代码
+  用法: fresh-button 链接 文本 类型 尺寸
+  类型: primary, outline (默认primary)
+  尺寸: sm, md, lg (可选)
+-->
+{{- $type := .Get 2 | default "primary" -}}
+{{- $size := .Get 3 -}}
+<a href="{{ .Get 0 }}" class="fresh-btn fresh-btn-{{ $type }}{{ with $size }} fresh-btn-{{ . }}{{ end }}">
+    {{ .Get 1 }}
+</a>

@@ -1,0 +1,235 @@
+/* ============================================
+   代码块简洁样式 - Code Simple Theme
+   用途: 替代原有的code-blocks.css和code-enhancements.css
+   特点: 朴素主题 + 横向滚动 + 复制按钮
+   ============================================ */
+
+/* ===== 基础代码块容器 ===== */
+.post-content .highlight {
+    position: relative;
+    margin: 1.5rem 0;
+    border-radius: 6px;
+    /* overflow: hidden; 移除以允许移动端触摸滚动 */
+    background-color: #f5f5f5;  /* 浅灰背景 */
+    border: none;  /* 移除边框，包括底部蓝色条 */
+}
+
+/* ===== 没有 .highlight 包裹的普通 pre 标签样式 ===== */
+.post-content pre:not(.highlight pre) {
+    position: relative;
+    margin: 1.5rem 0;
+    padding: 1.25rem 1rem;  /* 增加上下内边距，与 .highlight pre 保持一致 */
+    border-radius: 6px;
+    background-color: #f5f5f5;
+    overflow-x: auto;
+    overflow-y: hidden;
+    touch-action: pan-y pan-x;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ===== 代码块内部 <pre> 标签 ===== */
+.post-content .highlight pre {
+    margin: 0 !important;
+    padding: 1.25rem 1rem !important;  /* 增加上下内边距，让代码块看起来更高 */
+    overflow-x: auto;  /* 横向滚动 */
+    overflow-y: hidden;
+    background-color: transparent;
+    border: none;
+    touch-action: pan-y pan-x;  /* 移动端允许垂直和横向滚动 */
+    -webkit-overflow-scrolling: touch;  /* iOS平滑滚动 */
+}
+
+/* ===== 代码文本 <code> 标签 ===== */
+.post-content .highlight pre code,
+.post-content pre code {
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: none;
+    color: #333;  /* 深色文字 */
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre;  /* 保持原始格式,不换行 */
+    word-wrap: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+/* ===== 行内代码样式 ===== */
+.post-content :not(pre) > code {
+    display: inline;
+    padding: 0.2em 0.4em;
+    margin: 0 0.1em;
+    background-color: #f0f0f0;
+    color: #d73a49;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.85em;
+    white-space: nowrap;
+}
+
+/* ===== 自定义滚动条样式 (WebKit浏览器) - 蓝色渐变 ===== */
+.post-content .highlight pre::-webkit-scrollbar {
+    height: 10px;
+}
+
+.post-content .highlight pre::-webkit-scrollbar-track {
+    background: rgba(82, 156, 255, 0.1);
+    border-radius: 5px;
+}
+
+.post-content .highlight pre::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, rgba(82, 156, 255, 0.6), rgba(100, 180, 255, 0.8));
+    border-radius: 5px;
+}
+
+.post-content .highlight pre::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, rgba(82, 156, 255, 0.8), rgba(100, 180, 255, 1));
+}
+
+/* ===== 自定义滚动条样式 (Firefox) - 蓝色渐变 ===== */
+.post-content .highlight pre {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(82, 156, 255, 0.7) rgba(82, 156, 255, 0.1);
+}
+
+/* ===== 普通 pre 标签的滚动条样式 ===== */
+.post-content pre:not(.highlight pre)::-webkit-scrollbar {
+    height: 10px;
+}
+
+.post-content pre:not(.highlight pre)::-webkit-scrollbar-track {
+    background: rgba(82, 156, 255, 0.1);
+    border-radius: 5px;
+}
+
+.post-content pre:not(.highlight pre)::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, rgba(82, 156, 255, 0.6), rgba(100, 180, 255, 0.8));
+    border-radius: 5px;
+}
+
+.post-content pre:not(.highlight pre)::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, rgba(82, 156, 255, 0.8), rgba(100, 180, 255, 1));
+}
+
+.post-content pre:not(.highlight pre) {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(82, 156, 255, 0.7) rgba(82, 156, 255, 0.1);
+}
+
+/* ===== 复制按钮容器 ===== */
+.copy-code-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.copy-code-button:hover {
+    background-color: #fff;
+    border-color: #999;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.copy-code-button:active {
+    transform: scale(0.95);
+}
+
+/* 复制成功状态 */
+.copy-code-button.copied {
+    background-color: #4caf50;
+    color: white;
+    border-color: #4caf50;
+}
+
+/* ===== 移动端适配 ===== */
+@media (max-width: 768px) {
+    .post-content .highlight pre,
+    .post-content pre:not(.highlight pre) {
+        padding: 1.25rem 0.8rem !important;  /* 保持与桌面端相同的垂直padding，减小水平padding */
+        font-size: 0.85rem;
+    }
+
+    .copy-code-button {
+        /* 保持绝对定位在右上角 */
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        opacity: 1;  /* 移动端始终显示 */
+    }
+}
+
+/* ===== 亮色主题滚动条适配 ===== */
+body:not(.dark) .post-content .highlight pre::-webkit-scrollbar-track,
+body:not(.dark) .post-content pre:not(.highlight pre)::-webkit-scrollbar-track {
+    background: rgba(48, 128, 255, 0.08);
+}
+
+body:not(.dark) .post-content .highlight pre::-webkit-scrollbar-thumb,
+body:not(.dark) .post-content pre:not(.highlight pre)::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, rgba(48, 128, 255, 0.5), rgba(82, 156, 255, 0.7));
+}
+
+body:not(.dark) .post-content .highlight pre::-webkit-scrollbar-thumb:hover,
+body:not(.dark) .post-content pre:not(.highlight pre)::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, rgba(48, 128, 255, 0.7), rgba(82, 156, 255, 0.9));
+}
+
+body:not(.dark) .post-content .highlight pre,
+body:not(.dark) .post-content pre:not(.highlight pre) {
+    scrollbar-color: rgba(48, 128, 255, 0.6) rgba(48, 128, 255, 0.08);
+}
+
+/* ===== 暗色主题支持 (可选) ===== */
+@media (prefers-color-scheme: dark) {
+    .post-content .highlight,
+    .post-content pre:not(.highlight pre) {
+        background-color: #2d2d2d;
+        border: none;  /* 暗色主题也移除边框 */
+    }
+
+    .post-content .highlight pre code,
+    .post-content pre code {
+        color: #e0e0e0;
+    }
+
+    .post-content :not(pre) > code {
+        background-color: #3a3a3a;
+        color: #ff7b72;
+    }
+
+    .copy-code-button {
+        background-color: rgba(60, 60, 60, 0.9);
+        color: #e0e0e0;
+        border-color: #555;
+    }
+
+    .copy-code-button:hover {
+        background-color: #444;
+        border-color: #666;
+    }
+}
+
+/* ===== 打印样式 ===== */
+@media print {
+    .copy-code-button {
+        display: none;
+    }
+
+    .post-content .highlight pre {
+        overflow-x: visible;
+        white-space: pre-wrap;
+    }
+}

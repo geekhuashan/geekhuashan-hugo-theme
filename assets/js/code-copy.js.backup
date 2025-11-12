@@ -1,0 +1,161 @@
+/**
+ * 代码块复制功能
+ * 为所有代码块添加复制按钮
+ */
+
+(function() {
+    'use strict';
+
+    // 等待 DOM 加载完成
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCodeCopy);
+    } else {
+        initCodeCopy();
+    }
+
+    function initCodeCopy() {
+        // 查找所有代码块
+        const codeBlocks = document.querySelectorAll('.highlight');
+
+        if (codeBlocks.length === 0) {
+            return;
+        }
+
+        codeBlocks.forEach(function(block) {
+            // 避免重复添加
+            if (block.querySelector('.copy-code-button')) {
+                return;
+            }
+
+            // 创建包装器
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-copy-wrapper';
+
+            // 将代码块包装起来
+            block.parentNode.insertBefore(wrapper, block);
+            wrapper.appendChild(block);
+
+            // 创建复制按钮
+            const button = document.createElement('button');
+            button.className = 'copy-code-button';
+            button.type = 'button';
+            button.setAttribute('aria-label', '复制代码');
+
+            // 添加点击事件
+            button.addEventListener('click', function() {
+                copyCode(block, button);
+            });
+
+            // 将按钮插入到包装器中
+            wrapper.insertBefore(button, block);
+        });
+    }
+
+    function copyCode(block, button) {
+        // 获取代码内容
+        let code = '';
+        const codeElement = block.querySelector('code');
+
+        if (!codeElement) {
+            return;
+        }
+
+        // 如果有行号,只复制代码部分
+        const lines = codeElement.querySelectorAll('.line');
+        if (lines.length > 0) {
+            // 带行号的情况
+            lines.forEach(function(line) {
+                const codeSpan = line.querySelector('.cl');
+                if (codeSpan) {
+                    code += codeSpan.textContent + '\n';
+                }
+            });
+        } else {
+            // 没有行号的情况
+            code = codeElement.textContent;
+        }
+
+        // 去除末尾多余的换行
+        code = code.trim();
+
+        // 使用 Clipboard API 复制
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(function() {
+                showCopySuccess(button);
+            }).catch(function(err) {
+                console.error('复制失败:', err);
+                // 降级到传统方法
+                fallbackCopy(code, button);
+            });
+        } else {
+            // 浏览器不支持 Clipboard API,使用传统方法
+            fallbackCopy(code, button);
+        }
+    }
+
+    function fallbackCopy(text, button) {
+        // 创建临时 textarea
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        textarea.style.pointerEvents = 'none';
+        document.body.appendChild(textarea);
+
+        // 选择并复制
+        textarea.select();
+        textarea.setSelectionRange(0, text.length);
+
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess(button);
+            } else {
+                console.error('复制失败');
+            }
+        } catch (err) {
+            console.error('复制出错:', err);
+        }
+
+        // 移除临时元素
+        document.body.removeChild(textarea);
+    }
+
+    function showCopySuccess(button) {
+        // 添加成功状态
+        button.classList.add('copied');
+
+        // 2秒后恢复
+        setTimeout(function() {
+            button.classList.remove('copied');
+        }, 2000);
+    }
+
+    // 支持动态加载的内容
+    if (typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver(function(mutations) {
+            let shouldInit = false;
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes.length > 0) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) {
+                            if (node.classList && node.classList.contains('highlight')) {
+                                shouldInit = true;
+                            } else if (node.querySelector && node.querySelector('.highlight')) {
+                                shouldInit = true;
+                            }
+                        }
+                    });
+                }
+            });
+            if (shouldInit) {
+                initCodeCopy();
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+})();

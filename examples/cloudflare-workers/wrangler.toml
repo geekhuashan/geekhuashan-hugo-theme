@@ -1,0 +1,45 @@
+# Cloudflare Workers 配置文件
+# 文档: https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name = "your-blog-pageviews"  # 修改为你的项目名
+main = "pageviews.js"
+compatibility_date = "2024-01-01"
+
+# Workers 路由配置
+# 方式 1: 使用 workers.dev 子域名（开发/测试）
+# 访问地址: https://your-blog-pageviews.your-subdomain.workers.dev
+
+# 方式 2: 绑定到您的自定义域名（推荐）
+# 需要在 Cloudflare Dashboard 配置 Workers Routes
+# 示例: https://api.yourdomain.com/pageviews
+
+# 环境变量（敏感信息）
+# 通过 wrangler secret put 命令设置，不要直接写在这里
+#
+# 设置方法：
+# wrangler secret put GA4_PROPERTY_ID
+# wrangler secret put GA4_CREDENTIALS
+
+# KV 命名空间绑定（可选，用于缓存）
+# 如果不使用 KV，Workers 会自动使用 Cache API
+#
+# [[kv_namespaces]]
+# binding = "PAGEVIEWS_KV"
+# id = "your-kv-namespace-id"
+# preview_id = "your-preview-kv-namespace-id"
+
+# 限制和配额
+# 免费计划: 100,000 请求/天
+# CPU 时间: 10ms/请求
+# [limits]
+# cpu_ms = 50
+
+# 开发环境配置
+[env.development]
+name = "your-blog-pageviews-dev"
+vars = { ENVIRONMENT = "development" }
+
+# 生产环境配置
+[env.production]
+name = "your-blog-pageviews"
+vars = { ENVIRONMENT = "production" }

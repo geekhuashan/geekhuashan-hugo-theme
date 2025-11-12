@@ -1,0 +1,125 @@
+/* 双向链接样式 */
+
+/* 内部链接样式 */
+.internal-link {
+  color: #3b82f6;
+  text-decoration: none;
+  border-bottom: 1px dashed #3b82f6;
+  transition: all 0.2s ease;
+}
+
+.internal-link:hover {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+  border-bottom-style: solid;
+}
+
+/* 失效链接样式 */
+.broken-link {
+  color: #ef4444;
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* 反向链接区域 */
+.backlinks-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-radius: 12px;
+  border-left: 4px solid #3b82f6;
+}
+
+[data-theme="dark"] .backlinks-section {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-left-color: #60a5fa;
+}
+
+.backlinks-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+[data-theme="dark"] .backlinks-title {
+  color: #f3f4f6;
+}
+
+.backlinks-title svg {
+  color: #3b82f6;
+}
+
+.backlinks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.backlink-item {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="dark"] .backlink-item {
+  background: #374151;
+}
+
+.backlink-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.backlink-item:last-child {
+  margin-bottom: 0;
+}
+
+.backlink-title {
+  color: #1f2937;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+[data-theme="dark"] .backlink-title {
+  color: #f3f4f6;
+}
+
+.backlink-title:hover {
+  color: #3b82f6;
+}
+
+.backlink-excerpt {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+}
+
+[data-theme="dark"] .backlink-excerpt {
+  color: #9ca3af;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .backlinks-section {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .backlinks-title {
+    font-size: 1.1rem;
+  }
+
+  .backlink-item {
+    padding: 0.5rem;
+  }
+}

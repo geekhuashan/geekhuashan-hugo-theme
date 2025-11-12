@@ -1,0 +1,52 @@
+{{- if lt hugo.Version "0.125.7" }}
+{{- errorf "=> hugo v0.125.7 or greater is required for hugo-PaperMod to build " }}
+{{- end -}}
+
+<!DOCTYPE html>
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default " auto" }}">
+
+<head>
+    {{- partial "head.html" . }}
+</head>
+
+{{- $bodyClasses := slice }}
+{{- if (or (ne .Kind `page`) (eq .Layout `archives`) (eq .Layout `search`)) -}}
+    {{- $bodyClasses = $bodyClasses | append "list" -}}
+{{- end -}}
+{{- if eq site.Params.defaultTheme `dark` -}}
+    {{- $bodyClasses = $bodyClasses | append "dark" -}}
+{{- end -}}
+{{- $bodyClasses = $bodyClasses | append "fresh-theme" "modern-theme" -}}
+<body class="{{ delimit $bodyClasses " " }}" id="top">
+    <!-- 页面顶部装饰元素 -->
+    <div class="fresh-decoration-top"></div>
+
+    {{- partialCached "header.html" . .Page -}}
+
+    <main class="main fresh-main">
+        <div class="fresh-container modern-container">
+            {{- block "main" . }}{{ end }}
+        </div>
+    </main>
+
+    <!-- 自定义页脚 -->
+    <footer class="footer">
+        <span>&copy; {{ now.Year }} <a href="https://github.com/geekhuashan" target="_blank">Geekhuashan</a></span>
+        <span> Powered by <a href="https://github.com/geekhuashan/geekhuashan-hugo-theme"
+                target="_blank">geekhuashan-hugo-theme</a></span>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <a href="#top" aria-label="回到顶部" title="回到顶部 (Alt + G)" class="top-link" id="top-link" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </a>
+
+    {{ partialCached "extend_footer.html" . .Params.math -}}
+
+    <!-- 页面底部装饰元素 -->
+    <div class="fresh-decoration-bottom"></div>
+</body>
+
+</html>

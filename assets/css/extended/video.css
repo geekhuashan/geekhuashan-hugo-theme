@@ -1,0 +1,295 @@
+/* ========================================
+   视频播放器样式
+   适配本地视频、Cloudflare R2、第三方平台
+   ======================================== */
+
+/* 视频容器 */
+.video-container {
+    margin: 2rem auto;
+    max-width: 80%;  /* 默认最大宽度 80%，可在文章中用 width 参数覆盖 */
+    position: relative;
+}
+
+/* 视频包装器 - 响应式设计 */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    background: var(--theme);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.video-wrapper:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* 16:9 比例视频（第三方平台默认） */
+.video-wrapper-16x9 {
+    padding-bottom: 56.25%; /* 16:9 = 9/16 = 0.5625 */
+}
+
+.video-wrapper-16x9 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* HTML5 视频播放器 */
+.video-player {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #000;
+    border-radius: 8px;
+}
+
+/* 视频播放器控制条样式优化 */
+.video-player::-webkit-media-controls-panel {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+}
+
+/* Firefox 控制条 */
+.video-player::-moz-media-controls {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* 视频说明文字 */
+.video-caption {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--secondary);
+    text-align: center;
+    font-style: italic;
+}
+
+.video-caption code {
+    font-size: 0.85rem;
+}
+
+/* 视频回退提示（不支持 HTML5 时） */
+.video-fallback {
+    padding: 2rem;
+    text-align: center;
+    color: var(--secondary);
+    background: var(--code-bg);
+    border-radius: 4px;
+}
+
+.video-fallback a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.video-fallback a:hover {
+    color: var(--tertiary);
+}
+
+/* 视频错误提示 */
+.video-error {
+    padding: 1.5rem;
+    background: rgba(255, 59, 48, 0.1);
+    border: 2px solid rgba(255, 59, 48, 0.3);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.video-error p {
+    margin: 0;
+    color: var(--content);
+}
+
+.video-error code {
+    background: rgba(255, 59, 48, 0.2);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: var(--code-font-family);
+}
+
+/* 加载状态（骨架屏） */
+.video-wrapper.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        var(--hljs-bg) 0%,
+        var(--code-bg) 50%,
+        var(--hljs-bg) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* 播放按钮叠加层（用于封面图） */
+.video-wrapper::after {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-wrapper:hover::after {
+    opacity: 0.8;
+}
+
+/* 视频开始播放后隐藏播放按钮 */
+.video-player:not([poster]):not(:paused) ~ .video-wrapper::after {
+    display: none;
+}
+
+/* ========================================
+   响应式适配
+   ======================================== */
+
+/* 平板 */
+@media screen and (max-width: 768px) {
+    .video-container {
+        margin: 1.5rem auto;
+    }
+
+    .video-wrapper {
+        border-radius: 6px;
+    }
+
+    .video-caption {
+        font-size: 0.85rem;
+    }
+
+    .video-wrapper::after {
+        font-size: 3rem;
+    }
+}
+
+/* 手机 */
+@media screen and (max-width: 576px) {
+    .video-container {
+        margin: 1rem -1rem; /* 全屏宽度 */
+    }
+
+    .video-wrapper {
+        border-radius: 0; /* 移动端取消圆角 */
+        box-shadow: none;
+    }
+
+    .video-wrapper:hover {
+        box-shadow: none;
+    }
+
+    .video-caption {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        font-size: 0.8rem;
+    }
+
+    .video-wrapper::after {
+        font-size: 2.5rem;
+    }
+
+    /* 移动端优化控制条大小 */
+    .video-player::-webkit-media-controls-panel {
+        font-size: 14px;
+    }
+}
+
+/* ========================================
+   深色模式适配
+   ======================================== */
+
+.dark .video-wrapper {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .video-wrapper:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.dark .video-caption {
+    color: var(--secondary);
+}
+
+.dark .video-error {
+    background: rgba(255, 69, 58, 0.15);
+    border-color: rgba(255, 69, 58, 0.4);
+}
+
+/* ========================================
+   性能优化
+   ======================================== */
+
+/* GPU 加速 */
+.video-wrapper,
+.video-player {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* 减少重绘 */
+.video-wrapper::after {
+    backface-visibility: hidden;
+}
+
+/* Bilibili 播放器优化 */
+.video-wrapper iframe[src*="bilibili"] {
+    background: #000;
+}
+
+/* YouTube 播放器优化 */
+.video-wrapper iframe[src*="youtube"] {
+    background: #000;
+}
+
+/* ========================================
+   可访问性增强
+   ======================================== */
+
+/* 键盘焦点样式 */
+.video-player:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+    .video-wrapper {
+        border: 2px solid var(--border);
+    }
+
+    .video-error {
+        border-width: 3px;
+    }
+}
+
+/* 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+    .video-wrapper,
+    .video-wrapper::after,
+    .video-player {
+        transition: none;
+        animation: none;
+    }
+}

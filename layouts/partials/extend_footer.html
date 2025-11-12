@@ -1,0 +1,234 @@
+{{- /* Footer custom content area start */ -}}
+<!-- 页脚已完全移除 -->
+
+<!-- 回到顶部按钮样式 -->
+<style>
+    /* 回到顶部按钮 */
+    .top-link {
+        background-color: var(--modern-black);
+        color: var(--modern-white);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+        z-index: 99;
+    }
+
+    .top-link.show {
+        opacity: 0.7;
+        transform: translateY(0);
+    }
+
+    .top-link:hover {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+
+    .top-link svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* 移动端目录切换按钮 */
+    @media (max-width: 767px) {
+        .toc-toggle {
+            display: block;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            background: var(--modern-black);
+            color: var(--modern-white);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            z-index: 100;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0.7;
+            user-select: none;
+        }
+
+        .toc-toggle:before {
+            content: "≡";
+            font-size: 24px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .toc-toggle {
+            display: none;
+        }
+    }
+</style>
+
+<!-- 打印样式优化 -->
+<style media="print">
+    .header,
+    .top-link,
+    .toc-toggle {
+        display: none !important;
+    }
+
+    body {
+        padding-top: 0 !important;
+    }
+
+    .main {
+        margin: 0 !important;
+    }
+
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+
+    pre,
+    code {
+        background-color: #f8f8f8 !important;
+        border: 1px solid #eee !important;
+    }
+</style>
+
+<!-- 添加页面交互脚本 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 回到顶部按钮
+        const topLink = document.getElementById('top-link');
+        if (topLink) {
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 400) {
+                    topLink.classList.add('show');
+                } else {
+                    topLink.classList.remove('show');
+                }
+            });
+        }
+
+        // 明暗主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function () {
+                const nowDark = document.body.classList.toggle('dark');
+                localStorage.setItem('pref-theme', nowDark ? 'dark' : 'light');
+            });
+        }
+
+        // 创建目录切换按钮 (仅在移动端且有目录的页面)
+        const toc = document.querySelector('.toc');
+        if (toc && window.innerWidth < 768) {
+            const tocToggle = document.createElement('div');
+            tocToggle.className = 'toc-toggle';
+            document.body.appendChild(tocToggle);
+
+            // 切换目录显示/隐藏
+            tocToggle.addEventListener('click', function () {
+                toc.classList.toggle('show');
+                document.body.classList.toggle('toc-open');
+            });
+
+            // 点击目录外部区域关闭目录
+            document.addEventListener('click', function (e) {
+                if (toc.classList.contains('show') &&
+                    !toc.contains(e.target) &&
+                    e.target !== tocToggle) {
+                    toc.classList.remove('show');
+                    document.body.classList.remove('toc-open');
+                }
+            });
+        }
+    });
+</script>
+
+<!-- 添加移动端导航菜单脚本 - defer优化 -->
+{{ $mobileMenu := resources.Get "js/mobile-menu.js" | resources.Minify }}
+<script defer src="{{ $mobileMenu.RelPermalink }}"></script>
+
+<!-- 添加滚动效果脚本 - defer优化 -->
+{{ $scrollEffects := resources.Get "js/scroll-effects.js" | resources.Minify }}
+<script defer src="{{ $scrollEffects.RelPermalink }}"></script>
+
+<!-- 添加图片懒加载脚本 - defer优化 -->
+{{ $lazyLoading := resources.Get "js/lazy-loading.js" | resources.Minify }}
+<script defer src="{{ $lazyLoading.RelPermalink }}"></script>
+
+<!-- 添加浏览器兼容性脚本 - defer优化 -->
+{{ $compatibility := resources.Get "js/browser-compatibility.js" | resources.Minify }}
+<script defer src="{{ $compatibility.RelPermalink }}"></script>
+
+<!-- 添加代码块复制功能脚本 (简化版,无MutationObserver) - defer优化 -->
+{{ $codeCopy := resources.Get "js/code-copy-simple.js" | resources.Minify }}
+<script defer src="{{ $codeCopy.RelPermalink }}"></script>
+
+<!-- 添加发布日历热力图脚本 - defer优化 -->
+{{ $heatmap := resources.Get "js/heatmap-calendar.js" | resources.Minify }}
+<script defer src="{{ $heatmap.RelPermalink }}"></script>
+
+<!-- 添加页面浏览量统计脚本 - defer优化 -->
+{{ $pageViews := resources.Get "js/page-views.js" | resources.Minify }}
+<script defer src="{{ $pageViews.RelPermalink }}"></script>
+
+{{- /* KaTeX support for math rendering */ -}}
+{{- if .Params.math }}
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script defer>
+// 等待 KaTeX 库加载完成后再渲染
+window.addEventListener('load', function() {
+    if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          // 自定义分隔符配置，支持 $$...$$ 和 $...$
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // 抛出解析错误
+          throwOnError : false
+        });
+    }
+});
+</script>
+{{- end }}
+
+{{- /* 延迟加载 Google Analytics 优化首屏性能 */ -}}
+{{- if or hugo.IsProduction (eq site.Params.env "production") }}
+<script>
+    // 延迟加载 Google Analytics
+    function loadGoogleAnalytics() {
+        if (window.gaLoaded) return;
+        window.gaLoaded = true;
+
+        // 加载 gtag.js
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-6VNPK5R5ZD';
+        script.async = true;
+        document.head.appendChild(script);
+
+        // 初始化 Google Analytics
+        script.onload = function () {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-6VNPK5R5ZD');
+        };
+    }
+
+    // 空闲时加载 (优先)
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGoogleAnalytics);
+    } else {
+        // 降级: 2秒后加载
+        setTimeout(loadGoogleAnalytics, 2000);
+    }
+</script>
+{{- end }}
+
+{{- /* Footer custom content area end */ -}}

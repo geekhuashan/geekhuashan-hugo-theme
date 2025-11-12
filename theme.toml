@@ -1,0 +1,64 @@
+# theme.toml template for a Hugo theme
+# See https://github.com/gohugoio/hugoThemes#themetoml for an example
+
+name = "GeekHuashan Hugo Theme"
+license = "MIT"
+licenselink = "https://github.com/geekhuashan/geekhuashan-hugo-theme/blob/main/LICENSE"
+description = "基于 PaperMod 的高度定制化 Hugo 主题 - 包含 23 个自定义 CSS 模块、智能相关推荐、双向链接、AI SEO 优化等特性"
+homepage = "https://geekhuashan.com/"
+demosite = "https://geekhuashan.com/"
+tags = [
+  "responsive",
+  "clean",
+  "light",
+  "dark",
+  "blog",
+  "minimalist",
+  "search",
+  "multilingual",
+  "seo",
+  "ai-seo",
+  "schema-org",
+  "backlinks",
+  "related-posts",
+  "chinese",
+  "modern",
+  "fast"
+]
+features = [
+  "responsive",
+  "blog",
+  "cover-image",
+  "table-of-contents",
+  "opengraph",
+  "schema-org",
+  "favicon",
+  "archive",
+  "share-icons",
+  "multilingual",
+  "social-icons",
+  "minified-assets",
+  "theme-toggle",
+  "scroll-to-top",
+  "search",
+  "related-posts",
+  "backlinks",
+  "ai-seo",
+  "google-seo",
+  "code-copy",
+  "faq-schema",
+  "modular-css",
+  "twikoo-comments"
+]
+min_version = "0.135.0"
+
+[author]
+  name = "geekhuashan"
+  homepage = "https://github.com/geekhuashan"
+
+# If porting an existing theme
+[original]
+  name = "PaperMod"
+  author = "Aditya Telange"
+  homepage = "https://github.com/adityatelange"
+  repo = "https://github.com/adityatelange/hugo-PaperMod"

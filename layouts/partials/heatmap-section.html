@@ -1,0 +1,36 @@
+{{- if .Site.Params.heatmap.enable }}
+<section class="heatmap-section" id="publishing-heatmap">
+  <div id="heatmap-container" class="heatmap-container">
+    <div class="heatmap-loading">加载中...</div>
+  </div>
+
+  {{- /* 生成文章数据 JSON */ -}}
+  {{- $grouped := dict -}}
+  {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+
+  {{- range $posts -}}
+    {{- if not .Draft -}}
+      {{- $date := .Date.Format "2006-01-02" -}}
+      {{- $existing := index $grouped $date -}}
+
+      {{- if $existing -}}
+        {{- $newCount := add $existing.count 1 -}}
+        {{- $newTitles := $existing.titles | append .Title -}}
+        {{- $newUrls := $existing.urls | append .RelPermalink -}}
+        {{- $grouped = merge $grouped (dict $date (dict "date" $date "count" $newCount "titles" $newTitles "urls" $newUrls)) -}}
+      {{- else -}}
+        {{- $grouped = merge $grouped (dict $date (dict "date" $date "count" 1 "titles" (slice .Title) "urls" (slice .RelPermalink))) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $result := slice -}}
+  {{- range $date, $data := $grouped -}}
+    {{- $result = $result | append $data -}}
+  {{- end -}}
+
+  <script>
+    window.HEATMAP_DATA = {{ $result | jsonify | safeJS }};
+  </script>
+</section>
+{{- end }}

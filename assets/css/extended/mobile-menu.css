@@ -1,0 +1,235 @@
+/* 移动端导航菜单样式 - 所有样式仅在移动端生效 */
+@media (max-width: 768px) {
+    /* 汉堡菜单按钮 */
+    .menu-toggle {
+        display: flex !important;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        margin-left: auto;
+        z-index: 1002;
+        position: relative;
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 24px;
+        height: 20px;
+    }
+
+    .hamburger .line {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: var(--primary);
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active .hamburger .line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-toggle.active .hamburger .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .hamburger .line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* 背景遮罩由 JS 创建，这里只保留过渡动画 */
+    .menu-overlay {
+        animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    #menu {
+        display: none !important;
+        position: fixed !important;
+        top: 64px !important;
+        right: -250px !important;
+        width: 240px !important;
+        /* 移除 bottom 和固定 height，让高度自适应内容 */
+        height: auto !important;
+        max-height: calc(100vh - 64px) !important;
+        flex-direction: column !important;
+        /* 毛玻璃效果 - 与 TOC 相同 */
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 0 0 0 12px !important;
+        padding: 0 !important;
+        padding-bottom: 16px !important;
+        margin: 0 !important;
+        transition: right 0.3s ease-out !important;
+        z-index: 1001 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        /* 隐藏滚动条但保持滚动功能 */
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        gap: 0 !important;
+        align-items: stretch !important;
+        left: auto !important;
+        pointer-events: auto !important;
+    }
+
+    /* 隐藏菜单的滚动条 */
+    #menu::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    #menu.show {
+        display: flex !important;
+        right: 0 !important;
+    }
+
+    /* 完全移除伪元素 */
+    #menu::before {
+        content: none !important;
+        display: none !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+    }
+
+    #menu li {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 12px !important;
+        list-style: none !important;
+        flex-shrink: 0;
+        background: transparent !important;
+    }
+
+    #menu li + li {
+        margin-inline-start: 0 !important;
+        margin-top: 8px !important;
+    }
+
+    /* 统一的菜单项样式 */
+    #menu li a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 12px 16px !important;
+        height: 48px !important;
+        font-size: 1rem !important;
+        text-align: center !important;
+        border-radius: 8px !important;
+        border: none !important;
+        transition: all 0.2s ease !important;
+        position: relative !important;
+        color: var(--content) !important;
+        font-weight: 400 !important;
+        background: var(--theme) !important;
+    }
+
+    /* 第一个菜单项（搜索）上方留出空间 - 减少间距 */
+    #menu li:first-of-type {
+        margin-top: 16px !important;
+    }
+
+    #menu li a:hover {
+        background: var(--tertiary) !important;
+        transform: scale(1.02);
+    }
+
+    #menu li a:active {
+        background: var(--tertiary) !important;
+        transform: scale(0.98);
+    }
+
+    /* 选中项在任何状态下都不显示背景 */
+    #menu li a:has(span.active):hover,
+    #menu li a:has(span.active):active {
+        background: transparent !important;
+        transform: none !important;
+    }
+
+    #menu li a span {
+        background-color: transparent !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+        color: inherit !important;
+    }
+
+    /* 活动页面样式 - 移除背景，只保留左侧指示条和文字高亮 */
+    #menu li a:has(span.active) {
+        background: transparent !important;
+    }
+
+    #menu li a span.active {
+        color: var(--primary) !important;
+        font-weight: 600 !important;
+        background-color: transparent !important;
+        border-bottom: none !important;
+    }
+
+    /* 移除选中项所有伪元素的边框 */
+    #menu li a:has(span.active)::after,
+    #menu li a span.active::after {
+        display: none !important;
+        border: none !important;
+    }
+
+    /* 特别覆盖搜索按钮的样式（theme-modern.css 中有专门的规则） */
+    #menu li a[title*="搜索"] span.active,
+    #menu li a[title*="Search"] span.active {
+        color: var(--primary) !important;
+        background-color: transparent !important;
+    }
+
+    /* 已移除左侧蓝色指示条 */
+    /* #menu li a:has(span.active)::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 50%;
+        background: var(--primary);
+        border-radius: 0 3px 3px 0;
+    } */
+
+    /* 当菜单打开时禁止背景滚动 */
+    body.menu-opened {
+        overflow: hidden !important;
+    }
+
+    /* 暗色模式适配 - 毛玻璃效果 */
+    body.dark #menu {
+        background: rgba(28, 30, 36, 0.35) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    body.dark #menu li a {
+        background: var(--theme) !important;
+        color: var(--content) !important;
+    }
+
+    body.dark #menu li a:hover {
+        background: var(--tertiary) !important;
+    }
+
+    body.dark #menu li a:active {
+        background: var(--tertiary) !important;
+    }
+}

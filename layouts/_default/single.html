@@ -1,0 +1,88 @@
+{{- define "main" }}
+
+<article class="post-single" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title" itemprop="headline">
+      {{ .Title }}
+      {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+    </h1>
+    {{- if .Description }}
+    <div class="post-description" itemprop="description">
+      {{ .Description }}
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+      <meta itemprop="datePublished" content="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}">
+      <meta itemprop="dateModified" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+      {{- with (.Params.author | default site.Params.author) }}
+        {{- if reflect.IsSlice . }}
+          {{- range . }}
+            <meta itemprop="author" content="{{ . }}">
+          {{- end }}
+        {{- else }}
+          <meta itemprop="author" content="{{ . }}">
+        {{- end }}
+      {{- end }}
+      {{- partial "post_meta.html" . -}}
+      &nbsp;·&nbsp;<span class="page-views" data-page-url="{{ .RelPermalink }}"><svg class="view-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> <span class="view-count">0</span> 次浏览</span>
+      {{- partial "translation_list.html" . -}}
+      {{- partial "edit_post.html" . -}}
+      {{- partial "post_canonical.html" . -}}
+    </div>
+    {{- end }}
+    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+    {{- if gt (len ($.GetTerms $tags)) 0 }}
+    <ul class="post-tags-header">
+      {{- range ($.GetTerms $tags) }}
+      <li><a href="{{ .Permalink }}">#{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </header>
+  {{- $isHidden := .Params.cover.hidden | default site.Params.cover.hiddenInSingle | default site.Params.cover.hidden }}
+  {{- partial "cover.html" (dict "cxt" . "IsHome" false "isHidden" $isHidden) }}
+  {{- if (.Param "ShowToc") }}
+  {{- partial "toc.html" . }}
+  {{- end }}
+
+  {{- if .Content }}
+  <div class="post-content" itemprop="articleBody">
+    {{- $processedContent := .Content -}}
+    {{- /* 先处理双向链接 */ -}}
+    {{- $processedContent = partial "process-wikilinks.html" $processedContent -}}
+    {{- /* 再处理标题锚点 */ -}}
+    {{- if not (.Param "disableAnchoredHeadings") }}
+    {{- partial "anchored_headings.html" $processedContent -}}
+    {{- else }}{{ $processedContent | safeHTML }}{{ end }}
+  </div>
+  {{- end }}
+
+  <footer class="post-footer">
+    {{- /* {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }} */ -}}
+    {{- /* <ul class="post-tags"> */ -}}
+      {{- /* {{- range ($.GetTerms $tags) }} */ -}}
+      {{- /* <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li> */ -}}
+      {{- /* {{- end }} */ -}}
+      {{- /* </ul> */ -}}
+    {{- /* 双向链接区域 */ -}}
+    {{- partial "backlinks.html" . -}}
+
+    {{- /* 相关推荐区域（保持现有） */ -}}
+    {{- if site.Params.relatedPosts.enable }}
+    {{- partial "related_posts.html" . }}
+    {{- else if (.Param "ShowPostNavLinks") }}
+    {{- partial "post_nav_links.html" . }}
+    {{- end }}
+    {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+    {{- partial "share_icons.html" . -}}
+    {{- end }}
+  </footer>
+
+  {{- if (.Param "comments") }}
+  {{- partial "comments.html" . }}
+  {{- end }}
+</article>
+
+{{- end }}{{/* end main */}}

@@ -1,0 +1,138 @@
+/* ============================================
+   代码高亮 - 亮色主题 (GitHub Light 风格)
+   用途: 为亮色模式提供清晰的语法高亮
+   注意: 仅在 body:not(.dark) 时应用
+   ============================================ */
+
+/* 基础颜色 */
+body:not(.dark) .chroma {
+    color: #24292e;
+    background-color: transparent;
+}
+
+/* 注释 - 灰色斜体 */
+body:not(.dark) .chroma .c,    /* Comment */
+body:not(.dark) .chroma .c1,   /* CommentSingle */
+body:not(.dark) .chroma .cm {  /* CommentMultiline */
+    color: #6a737d;
+    font-style: italic;
+}
+
+/* 关键字 - 红色 */
+body:not(.dark) .chroma .k,    /* Keyword */
+body:not(.dark) .chroma .kd,   /* KeywordDeclaration */
+body:not(.dark) .chroma .kt,   /* KeywordType */
+body:not(.dark) .chroma .kn,   /* KeywordNamespace */
+body:not(.dark) .chroma .kp,   /* KeywordPseudo */
+body:not(.dark) .chroma .kr {  /* KeywordReserved */
+    color: #d73a49;
+}
+
+/* 常量关键字 - 橙色 */
+body:not(.dark) .chroma .kc {  /* KeywordConstant */
+    color: #f5a97f;
+}
+
+/* 字符串 - 深蓝色 */
+body:not(.dark) .chroma .s,    /* String */
+body:not(.dark) .chroma .s1,   /* StringSingle */
+body:not(.dark) .chroma .s2,   /* StringDouble */
+body:not(.dark) .chroma .sb,   /* StringBacktick */
+body:not(.dark) .chroma .sc {  /* StringChar */
+    color: #032f62;
+}
+
+/* 字符串文档 - 灰色 */
+body:not(.dark) .chroma .sd {  /* StringDoc */
+    color: #6a737d;
+}
+
+/* 字符串转义 - 蓝色 */
+body:not(.dark) .chroma .se,   /* StringEscape */
+body:not(.dark) .chroma .dl {  /* StringDelimiter */
+    color: #005cc5;
+}
+
+/* 内置函数和类型 - 蓝色 */
+body:not(.dark) .chroma .nb,   /* NameBuiltin */
+body:not(.dark) .chroma .bp,   /* NameBuiltinPseudo */
+body:not(.dark) .chroma .nc {  /* NameClass */
+    color: #005cc5;
+}
+
+/* 函数名 - 紫色 */
+body:not(.dark) .chroma .nf,   /* NameFunction */
+body:not(.dark) .chroma .fm {  /* NameFunctionMagic */
+    color: #6f42c1;
+}
+
+/* 装饰器 - 紫色加粗 */
+body:not(.dark) .chroma .nd {  /* NameDecorator */
+    color: #6f42c1;
+    font-weight: bold;
+}
+
+/* HTML/XML 标签 - 绿色 */
+body:not(.dark) .chroma .nt {  /* NameTag */
+    color: #22863a;
+}
+
+/* 属性 - 蓝色 */
+body:not(.dark) .chroma .na {  /* NameAttribute */
+    color: #005cc5;
+}
+
+/* 变量 - 深灰色 */
+body:not(.dark) .chroma .nv,   /* NameVariable */
+body:not(.dark) .chroma .vc,   /* NameVariableClass */
+body:not(.dark) .chroma .vg,   /* NameVariableGlobal */
+body:not(.dark) .chroma .vi,   /* NameVariableInstance */
+body:not(.dark) .chroma .vm {  /* NameVariableMagic */
+    color: #24292e;
+}
+
+/* 常量 - 橙色 */
+body:not(.dark) .chroma .no {  /* NameConstant */
+    color: #f5a97f;
+}
+
+/* 运算符 - 红色 */
+body:not(.dark) .chroma .o,    /* Operator */
+body:not(.dark) .chroma .ow {  /* OperatorWord */
+    color: #d73a49;
+}
+
+/* 数字 - 蓝色 */
+body:not(.dark) .chroma .m,    /* Number */
+body:not(.dark) .chroma .mi,   /* NumberInteger */
+body:not(.dark) .chroma .mf,   /* NumberFloat */
+body:not(.dark) .chroma .mh,   /* NumberHex */
+body:not(.dark) .chroma .mo {  /* NumberOct */
+    color: #005cc5;
+}
+
+/* 错误 - 红色 */
+body:not(.dark) .chroma .err {
+    color: #cb2431;
+}
+
+/* 泛型标记 - 蓝色 */
+body:not(.dark) .chroma .gi {  /* GenericInserted */
+    color: #22863a;
+}
+
+/* 泛型删除 - 红色 */
+body:not(.dark) .chroma .gd {  /* GenericDeleted */
+    color: #cb2431;
+}
+
+/* 泛型标题 - 蓝色加粗 */
+body:not(.dark) .chroma .gh {  /* GenericHeading */
+    color: #005cc5;
+    font-weight: bold;
+}
+
+/* 泛型子标题 - 蓝色 */
+body:not(.dark) .chroma .gu {  /* GenericSubheading */
+    color: #005cc5;
+}

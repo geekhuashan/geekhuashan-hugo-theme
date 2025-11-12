@@ -1,0 +1,38 @@
+{{- /*
+Optimized Image Shortcode for SEO and Performance
+Usage: {{< img src="image.jpg" alt="描述" title="标题" >}}
+*/ -}}
+
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default (.Get "title") | default "" -}}
+{{- $title := .Get "title" | default "" -}}
+{{- $class := .Get "class" | default "" -}}
+{{- $loading := .Get "loading" | default "lazy" -}}
+{{- $width := .Get "width" | default "" -}}
+{{- $height := .Get "height" | default "" -}}
+
+{{- /* Determine if image is relative or absolute */ -}}
+{{- $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+{{- $imgSrc := $src -}}
+{{- if not $isRemote -}}
+  {{- $imgSrc = $src | absURL -}}
+{{- end -}}
+
+<figure{{- with $class }} class="{{ . }}"{{- end }} itemscope itemtype="https://schema.org/ImageObject">
+  <img
+    src="{{ $imgSrc }}"
+    alt="{{ $alt }}"
+    {{- with $title }} title="{{ . }}"{{- end }}
+    {{- with $width }} width="{{ . }}"{{- end }}
+    {{- with $height }} height="{{ . }}"{{- end }}
+    loading="{{ $loading }}"
+    itemprop="contentUrl"
+    {{- if $alt }} aria-label="{{ $alt }}"{{- end }}
+  >
+  {{- if $title }}
+  <figcaption itemprop="caption">{{ $title }}</figcaption>
+  {{- end }}
+  <meta itemprop="url" content="{{ $imgSrc }}">
+  {{- with $alt }}<meta itemprop="name" content="{{ . }}">{{- end }}
+  {{- with $title }}<meta itemprop="description" content="{{ . }}">{{- end }}
+</figure>

@@ -1,0 +1,11 @@
+{{- /*
+FAQ Item Shortcode (child of faq shortcode)
+Usage: {{< faq-item question="问题" >}}答案{{< /faq-item >}}
+*/ -}}
+
+{{- $question := .Get "question" -}}
+{{- $answer := .Inner -}}
+
+{{- $faq_items := .Page.Scratch.Get "faq_items" | default slice -}}
+{{- $new_item := dict "question" $question "answer" $answer -}}
+{{- .Page.Scratch.Set "faq_items" ($faq_items | append $new_item) -}}

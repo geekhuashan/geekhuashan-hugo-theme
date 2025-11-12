@@ -1,0 +1,42 @@
+{{- /* 异步加载自定义 CSS，避免阻塞首屏渲染 */ -}}
+{{ $custom_css := resources.Get "css/custom.css" | resources.ExecuteAsTemplate "css/custom.css" . | minify | fingerprint
+}}
+<link rel="preload" href="{{ $custom_css.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="{{ $custom_css.RelPermalink }}" integrity="{{ $custom_css.Data.Integrity }}">
+</noscript>
+
+
+
+{{- /* KaTeX support for math rendering */ -}}
+{{- if .Params.math }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+{{- end }}
+
+{{- /* Load Google AdSense with delay to optimize FCP/LCP */}}
+{{- if or hugo.IsProduction (eq site.Params.env "production") }}
+<script>
+  // 延迟加载 AdSense 优化首屏渲染性能
+  function loadAdSense() {
+    if (window.adsenseLoaded) return;
+    window.adsenseLoaded = true;
+
+    const script = document.createElement('script');
+    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8162478009923037';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    document.head.appendChild(script);
+  }
+
+  // 方式1: 用户滚动时加载
+  window.addEventListener('scroll', loadAdSense, { once: true, passive: true });
+
+  // 方式2: 3秒后兜底加载
+  setTimeout(loadAdSense, 3000);
+
+  // 方式3: 页面可交互时加载
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadAdSense);
+  }
+</script>
+{{- end }}

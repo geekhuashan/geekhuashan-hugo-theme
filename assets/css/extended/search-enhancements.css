@@ -1,0 +1,401 @@
+/* ========================================
+   搜索页面增强样式
+   ======================================== */
+
+/* 搜索增强内容容器 */
+.search-enhancements {
+    margin-top: 3rem;
+    display: grid;
+    gap: 2rem;
+}
+
+/* 通用标题样式 */
+.search-enhancements h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--content);
+}
+
+/* ========================================
+   文章统计
+   ======================================== */
+.search-stats {
+    background: var(--entry);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    text-align: center;
+}
+
+/* ========================================
+   热门标签云
+   ======================================== */
+.search-tags {
+    background: var(--entry);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tag-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--theme);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--content);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.tag-item:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tag-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: var(--tertiary);
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--content);
+}
+
+.tag-item:hover .tag-count {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+/* ========================================
+   快速分类入口
+   ======================================== */
+.search-categories {
+    background: var(--entry);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 桌面端固定4列一行 */
+    gap: 1rem;
+}
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: var(--theme);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.tech-card {
+    border-color: #3b82f6;
+}
+
+.tech-card:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-color: #3b82f6;
+    color: white;
+}
+
+.read-card {
+    border-color: #8b5cf6;
+}
+
+.read-card:hover {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    border-color: #8b5cf6;
+    color: white;
+}
+
+.life-card {
+    border-color: #ec4899;
+}
+
+.life-card:hover {
+    background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+    border-color: #ec4899;
+    color: white;
+}
+
+.project-card {
+    border-color: #10b981;
+}
+
+.project-card:hover {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-color: #10b981;
+    color: white;
+}
+
+.category-icon {
+    font-size: 2.5rem;
+}
+
+.category-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--content);
+}
+
+.category-card:hover .category-name,
+.category-card:hover .category-count {
+    color: white;
+}
+
+.category-count {
+    font-size: 0.85rem;
+    color: var(--secondary);
+}
+
+/* ========================================
+   最近更新列表
+   ======================================== */
+.search-recent {
+    background: var(--entry);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.recent-posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.recent-posts li {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.75rem;
+}
+
+.recent-posts li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.recent-posts a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--content);
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+.recent-posts a:hover {
+    background: var(--theme);
+    transform: translateX(4px);
+}
+
+.recent-title {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.recent-posts a:hover .recent-title {
+    color: var(--primary);
+}
+
+.recent-date {
+    font-size: 0.85rem;
+    color: var(--secondary);
+    white-space: nowrap;
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+
+/* 平板 */
+@media screen and (max-width: 768px) {
+    .search-enhancements {
+        gap: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .category-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tag-cloud {
+        gap: 0.5rem;
+    }
+
+    .tag-item {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* 手机 */
+@media screen and (max-width: 576px) {
+    .search-enhancements h3 {
+        font-size: 1.1rem;
+    }
+
+    .search-stats,
+    .search-tags,
+    .search-categories,
+    .search-recent {
+        padding: 1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    .category-card {
+        padding: 1rem;
+    }
+
+    .category-icon {
+        font-size: 2rem;
+    }
+
+    .category-name {
+        font-size: 1rem;
+    }
+
+    .recent-posts a {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .recent-date {
+        font-size: 0.75rem;
+    }
+}
+
+/* ========================================
+   深色模式适配
+   ======================================== */
+.dark .search-stats,
+.dark .search-tags,
+.dark .search-categories,
+.dark .search-recent {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark .category-card {
+    background: var(--entry);
+}
+
+.dark .category-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================
+   动画效果
+   ======================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-enhancements > div {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.search-enhancements > div:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.search-enhancements > div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.search-enhancements > div:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.search-enhancements > div:nth-child(4) {
+    animation-delay: 0.4s;
+}

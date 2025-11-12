@@ -1,0 +1,56 @@
+{{- $content := . -}}
+
+{{- /* 正则匹配所有 [[xxx]] 和 [[display|target]] 格式 */ -}}
+{{- $wikilinks := findRE `\[\[([^\]]+)\]\]` $content -}}
+
+{{- range $wikilinks -}}
+  {{- $inner := replaceRE `^\[\[|\]\]$` "" . -}}
+
+  {{- /* 检查是否是别名格式 [[display|target]] */ -}}
+  {{- if strings.Contains $inner "|" -}}
+    {{- $parts := split $inner "|" -}}
+    {{- $display := index $parts 0 -}}
+    {{- $target := index $parts 1 -}}
+
+    {{- /* 尝试查找目标页面 */ -}}
+    {{- $page := false -}}
+    {{- range where site.RegularPages "Section" "posts" -}}
+      {{- if eq .File.ContentBaseName $target -}}
+        {{- $page = . -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* 替换为标准 Markdown 链接或错误标记 */ -}}
+    {{- if $page -}}
+      {{- $replacement := printf `<a href="%s" class="internal-link" title="%s">%s</a>` $page.RelPermalink $page.Title $display -}}
+      {{- $content = replace $content . $replacement -}}
+    {{- else -}}
+      {{- $replacement := printf `<span class="broken-link" title="找不到文章：%s">%s</span>` $target $display -}}
+      {{- $content = replace $content . $replacement -}}
+    {{- end -}}
+
+  {{- else -}}
+    {{- /* 简单格式 [[target]] */ -}}
+    {{- $target := $inner -}}
+
+    {{- /* 尝试查找目标页面 */ -}}
+    {{- $page := false -}}
+    {{- range where site.RegularPages "Section" "posts" -}}
+      {{- if eq .File.ContentBaseName $target -}}
+        {{- $page = . -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* 替换为标准 Markdown 链接或错误标记 */ -}}
+    {{- if $page -}}
+      {{- $replacement := printf `<a href="%s" class="internal-link" title="%s">%s</a>` $page.RelPermalink $page.Title $page.Title -}}
+      {{- $content = replace $content . $replacement -}}
+    {{- else -}}
+      {{- $replacement := printf `<span class="broken-link" title="找不到文章：%s">%s</span>` $target $target -}}
+      {{- $content = replace $content . $replacement -}}
+    {{- end -}}
+
+  {{- end -}}
+{{- end -}}
+
+{{- return $content -}}

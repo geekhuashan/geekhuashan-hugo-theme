@@ -1,0 +1,80 @@
+{{- define "main" }}
+
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+</header>
+
+<!-- 分类卡片区块 -->
+<div class="category-blocks">
+    <!-- 技术分类 -->
+    <a href="/categories/tech/" class="category-block">
+        <div class="category-header">
+            <span class="icon">💻</span>
+            技术
+        </div>
+        <div class="category-content">
+            程序开发、技术博客、学习笔记等内容
+        </div>
+    </a>
+
+    <!-- 阅读分类 -->
+    <a href="/categories/read/" class="category-block">
+        <div class="category-header">
+            <span class="icon">📚</span>
+            阅读
+        </div>
+        <div class="category-content">
+            书籍笔记、读后感、文学讨论等内容
+        </div>
+    </a>
+
+    <!-- 生活分类 -->
+    <a href="/categories/life/" class="category-block">
+        <div class="category-header">
+            <span class="icon">🌱</span>
+            生活
+        </div>
+        <div class="category-content">
+            生活随笔、日常感悟、个人心得等内容
+        </div>
+    </a>
+
+    <!-- 工作项目分类 -->
+    <a href="/categories/project/" class="category-block">
+        <div class="category-header">
+            <span class="icon">💼</span>
+            工作项目
+        </div>
+        <div class="category-content">
+            项目实践、技术方案、工作总结等内容
+        </div>
+    </a>
+</div>
+
+<!-- 标签云 -->
+<div class="tags-cloud">
+    <h2 class="tags-title">文章标签</h2>
+    <div class="tags-list">
+        {{- range .Site.Taxonomies.tags }}
+        <a href="{{ .Page.RelPermalink }}" class="tag-item">
+            {{ .Page.Title }}
+            <span class="tag-count">{{ .Count }}</span>
+        </a>
+        {{- end }}
+    </div>
+</div>
+
+<!-- 所有分类列表 -->
+<div class="all-categories">
+    <h2>所有分类</h2>
+    <ul>
+        {{- range .Site.Taxonomies.categories }}
+        <li>
+            <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+            <span class="category-count">({{ .Count }})</span>
+        </li>
+        {{- end }}
+    </ul>
+</div>
+
+{{- end }}{{/* end main */}}

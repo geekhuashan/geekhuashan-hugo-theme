@@ -1,0 +1,53 @@
+{{- $link := .Destination -}}
+{{- $text := .Text -}}
+{{- $title := .Title -}}
+
+{{- /* 检测是否是双链语法 [[xxx]] */ -}}
+{{- if and (strings.HasPrefix $link "[[") (strings.HasSuffix $link "]]") -}}
+
+  {{- /* 移除 [[ 和 ]] */ -}}
+  {{- $target := strings.TrimPrefix "[[" $link | strings.TrimSuffix "]]" -}}
+
+  {{- /* 支持别名：[[显示|文件名]] */ -}}
+  {{- $displayText := $text -}}
+  {{- $fileName := $target -}}
+  {{- if strings.Contains $target "|" -}}
+    {{- $parts := split $target "|" -}}
+    {{- $displayText = index $parts 0 -}}
+    {{- $fileName = index $parts 1 -}}
+  {{- end -}}
+
+  {{- /* 尝试匹配文章 */ -}}
+  {{- $page := false -}}
+
+  {{- /* 方法 1：按文件名匹配（去除 .md） */ -}}
+  {{- range where site.RegularPages "Section" "posts" -}}
+    {{- if eq .File.ContentBaseName $fileName -}}
+      {{- $page = . -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* 方法 2：按路径匹配（备选） */ -}}
+  {{- if not $page -}}
+    {{- $page = site.GetPage (printf "/posts/%s" $fileName) -}}
+  {{- end -}}
+
+  {{- /* 渲染链接 */ -}}
+  {{- if $page -}}
+    <a href="{{ $page.RelPermalink }}" class="internal-link" title="{{ $page.Title }}">
+      {{- $displayText | default $page.Title -}}
+    </a>
+  {{- else -}}
+    <span class="broken-link" title="找不到文章：{{ $fileName }}">
+      {{- $displayText | default $fileName -}}
+    </span>
+  {{- end -}}
+
+{{- else -}}
+  {{- /* 普通链接，保持默认行为 */ -}}
+  <a href="{{ $link }}"
+     {{- with $title }} title="{{ . }}"{{ end -}}
+     {{- if strings.HasPrefix $link "http" }} target="_blank" rel="noopener"{{ end -}}>
+    {{- $text | safeHTML -}}
+  </a>
+{{- end -}}

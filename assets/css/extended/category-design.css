@@ -1,0 +1,174 @@
+/* 
+ * 分类与标签页设计
+ * 简约、大气、现代风格
+ */
+
+/* 分类块布局 */
+.category-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 2rem 0 3rem;
+}
+
+.category-block {
+    flex: 1;
+    min-width: 200px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--modern-shadow-sm);
+    text-decoration: none !important;
+    background: var(--modern-white);
+    display: block;
+}
+
+.category-block:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--modern-shadow-md);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.category-header {
+    padding: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.category-header .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.category-content {
+    padding: 1.2rem 1.5rem;
+    color: var(--modern-gray);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* 标签云样式 */
+.tags-cloud {
+    margin: 3rem 0;
+}
+
+.tags-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.tag-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--modern-light);
+    border-radius: 50px;
+    color: var(--modern-gray-dark);
+    font-size: 0.9rem;
+    transition: all 0.25s ease;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.tag-item:hover {
+    background-color: var(--modern-black);
+    color: var(--modern-white);
+    transform: translateY(-2px);
+}
+
+.tag-item .tag-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--modern-white);
+    color: var(--modern-gray-dark);
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+
+.tag-item:hover .tag-count {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--modern-white);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .category-blocks {
+        flex-direction: column;
+    }
+
+    .category-block {
+        width: 100%;
+    }
+}
+
+/* 首页标签云样式 */
+.home-tags-cloud {
+    margin-top: 2.5rem;
+    width: 100%;
+}
+
+.profile_inner .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile_inner .tag-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.9rem;
+    background-color: var(--modern-light);
+    border-radius: 50px;
+    color: var(--modern-gray-dark);
+    font-size: 0.85rem;
+    transition: all 0.25s ease;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.profile_inner .tag-item:hover {
+    background-color: var(--modern-black);
+    color: var(--modern-white);
+    transform: translateY(-2px);
+}
+
+.profile_inner .tag-item .tag-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--modern-white);
+    color: var(--modern-gray-dark);
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+
+.profile_inner .tag-item:hover .tag-count {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--modern-white);
+}

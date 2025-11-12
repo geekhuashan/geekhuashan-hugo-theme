@@ -1,0 +1,187 @@
+/* 增强的响应式布局样式 */
+
+/* 表格横向滚动支持（全局） */
+.post-content table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* 大屏幕设备 (> 1400px) */
+@media (min-width: 1400px) {
+    .main {
+        max-width: 1280px;
+    }
+
+    .post-content {
+        font-size: 1.05rem;
+    }
+}
+
+/* 中等屏幕设备 (992px - 1399px) */
+@media (max-width: 1399px) and (min-width: 992px) {
+    .main {
+        max-width: 960px;
+    }
+}
+
+/* 平板设备 (768px - 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .main {
+        max-width: 720px;
+    }
+
+    .profile_inner {
+        padding: 1.5rem;
+    }
+
+    .post-entry {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* 手机设备 (< 768px) */
+@media (max-width: 767px) {
+    :root {
+        --gap: 1rem;
+    }
+
+    .main {
+        padding: var(--gap);
+    }
+
+    .first-entry {
+        margin-bottom: var(--gap);
+    }
+
+    .post-content {
+        font-size: 1rem;
+    }
+
+    .post-entry {
+        margin-bottom: var(--gap);
+    }
+
+    .profile_inner {
+        padding: 1.25rem;
+    }
+
+    .profile_inner h1 {
+        font-size: 1.75rem;
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+        max-width: 400px; /* 移动端限制宽度 */
+    }
+
+    .button {
+        flex: 0 1 calc(50% - 6px); /* 移动端强制2列布局 */
+        min-width: 140px;
+    }
+
+    .category-blocks {
+        gap: 1rem;
+    }
+
+    /* 调整标签大小 */
+    .profile_inner .tags-list {
+        gap: 0.5rem;
+    }
+
+    .profile_inner .tag-item {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.8rem;
+    }
+
+    .profile_inner .tag-item .tag-count {
+        width: 16px;
+        height: 16px;
+        font-size: 0.6rem;
+    }
+
+    /* 改进表格在移动端的显示 */
+    .post-content table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    /* 改进代码块在移动端的显示 */
+    .post-content pre {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        border-radius: 0;
+    }
+}
+
+/* 小型手机设备 (< 576px) */
+@media (max-width: 575px) {
+    .header {
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .profile_inner h1 {
+        font-size: 1.5rem;
+    }
+
+    .profile_inner .buttons .button {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+        margin: 0.4rem 0;
+        min-height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 两列显示分类块 */
+    .buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 90%;
+        max-width: 400px;
+        margin: 0 auto;
+        gap: 12px;
+    }
+
+    .button {
+        flex: 0 1 calc(50% - 6px);
+        min-width: 140px;
+        margin: 0;
+        border-radius: 8px;
+    }
+}
+
+/* 手机横屏模式 */
+@media (max-width: 767px) and (orientation: landscape) {
+    .profile_inner {
+        padding: 1rem;
+    }
+
+    /* 在横屏模式下改为水平排列 */
+    .buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 500px;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .button {
+        width: auto;
+        flex: 0 0 calc(33.33% - 1rem);
+        min-width: 120px;
+        margin: 0;
+    }
+
+    .profile_inner .buttons .button {
+        min-height: 2.5rem;
+        padding: 0.5rem;
+    }
+}

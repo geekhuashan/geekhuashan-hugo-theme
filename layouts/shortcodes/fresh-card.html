@@ -1,0 +1,13 @@
+<!-- 
+  卡片短代码
+  用法: fresh-card 可选的卡片标题
+  内容支持Markdown格式
+-->
+<div class="fresh-card">
+  {{- with .Get 0 -}}
+  <div class="fresh-card-header">{{ . }}</div>
+  {{- end -}}
+  <div class="fresh-card-body">
+    {{ .Inner | markdownify }}
+  </div>
+</div>

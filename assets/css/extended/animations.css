@@ -1,0 +1,88 @@
+/* 网站交互动画和过渡效果 */
+
+/* 基础过渡效果 */
+.post-entry,
+.first-entry,
+.post-footer,
+.tag-item,
+.category-block,
+.button,
+.menu a,
+.social-icons a,
+.toc a,
+.search-form-input {
+    transition: all 0.3s ease;
+}
+
+/* 导航菜单项悬停效果 */
+.nav #menu a:hover span {
+    background: linear-gradient(to right, var(--modern-black), var(--modern-gray-dark));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    transform: translateX(3px);
+}
+
+/* 首页文章卡片悬停动画 */
+.post-entry:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--modern-shadow-md);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* 文章内容链接悬停效果 */
+.post-content a:hover {
+    text-decoration: none;
+    background-size: 100% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to right, var(--modern-primary), var(--modern-primary-light));
+}
+
+/* 按钮悬停效果 */
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 社交图标悬停效果 */
+.social-icons a:hover {
+    transform: translateY(-3px) scale(1.1);
+}
+
+/* 页面加载淡入效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* 导航栏滚动效果 */
+.header {
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.header.scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--entry);
+}
+
+/* 搜索框聚焦动画 */
+.search-form-input:focus {
+    box-shadow: 0 0 0 2px var(--modern-primary-light);
+    transform: translateY(-1px);
+}
+
+/* 标签悬停动画增强 */
+.tag-item:hover {
+    transform: translateY(-3px) scale(1.05);
+}

@@ -1,0 +1,49 @@
+/**
+ * 页面浏览量样式
+ * 显示在文章元信息中（日期、阅读时间、作者后面）
+ */
+
+.page-views {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--secondary);
+    font-size: inherit;
+    white-space: nowrap;
+}
+
+.page-views .view-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+    vertical-align: text-bottom;
+    margin-right: 2px;
+}
+
+.page-views .view-count {
+    font-weight: 500;
+    color: var(--primary);
+}
+
+/* 暗色模式下的样式调整 */
+.dark .page-views {
+    color: var(--secondary);
+}
+
+.dark .page-views .view-count {
+    color: var(--primary);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .page-views {
+        font-size: 0.9em;
+    }
+}
+
+/* 打印时隐藏浏览量 */
+@media print {
+    .page-views {
+        display: none !important;
+    }
+}

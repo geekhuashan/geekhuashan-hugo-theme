@@ -1,0 +1,15 @@
+{{- /* Comments area start */ -}}
+{{- /* to add comments read => https://gohugo.io/content-management/comments/ */ -}}
+
+{{- if site.Params.twikoo -}}
+<div id="twikoo"></div>
+<script src="https://cdn.staticfile.org/twikoo/{{ site.Params.twikoo.version }}/twikoo.all.min.js"></script>
+<script>
+    twikoo.init({
+        envId: 'https://twikoo.geekhuashan.com/',
+        el: '#twikoo',
+    });
+</script>
+{{- end -}}
+
+{{- /* Comments area end */ -}}

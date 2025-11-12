@@ -1,0 +1,150 @@
+/* 
+ * 小清新主题 - 组件样式
+ * 包含卡片、按钮等基础组件的小清新风格
+ */
+
+/* 卡片 */
+.fresh-card {
+    background-color: var(--fresh-bg);
+    border-radius: var(--fresh-radius-md);
+    border: 1px solid var(--fresh-border);
+    overflow: hidden;
+    transition: var(--fresh-transition);
+    margin-bottom: var(--fresh-space-4);
+}
+
+.fresh-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--fresh-shadow-hover);
+}
+
+.fresh-card-header {
+    padding: var(--fresh-space-4) var(--fresh-space-4) var(--fresh-space-2);
+    border-bottom: 1px solid var(--fresh-border);
+}
+
+.fresh-card-body {
+    padding: var(--fresh-space-4);
+}
+
+.fresh-card-footer {
+    padding: var(--fresh-space-2) var(--fresh-space-4) var(--fresh-space-4);
+    border-top: 1px solid var(--fresh-border);
+}
+
+/* 按钮 */
+.fresh-btn {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: var(--fresh-radius-sm);
+    transition: var(--fresh-transition);
+}
+
+.fresh-btn-primary {
+    color: #fff;
+    background-color: var(--fresh-primary);
+    border-color: var(--fresh-primary);
+}
+
+.fresh-btn-primary:hover {
+    background-color: var(--fresh-primary-dark);
+    border-color: var(--fresh-primary-dark);
+}
+
+.fresh-btn-outline {
+    color: var(--fresh-primary);
+    background-color: transparent;
+    border-color: var(--fresh-primary);
+}
+
+.fresh-btn-outline:hover {
+    color: #fff;
+    background-color: var(--fresh-primary);
+    border-color: var(--fresh-primary);
+}
+
+.fresh-btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: var(--fresh-radius-sm);
+}
+
+.fresh-btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: var(--fresh-radius-md);
+}
+
+/* 徽章 */
+.fresh-badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--fresh-radius-sm);
+    transition: var(--fresh-transition);
+}
+
+.fresh-badge-primary {
+    color: #fff;
+    background-color: var(--fresh-primary);
+}
+
+.fresh-badge-success {
+    color: #fff;
+    background-color: var(--fresh-success);
+}
+
+.fresh-badge-warning {
+    color: #212529;
+    background-color: var(--fresh-warning);
+}
+
+.fresh-badge-danger {
+    color: #fff;
+    background-color: var(--fresh-danger);
+}
+
+/* 警告框 */
+.fresh-alert {
+    position: relative;
+    padding: var(--fresh-space-3) var(--fresh-space-4);
+    margin-bottom: var(--fresh-space-4);
+    border: 1px solid transparent;
+    border-radius: var(--fresh-radius-md);
+}
+
+.fresh-alert-info {
+    color: #0c5460;
+    background-color: var(--fresh-info);
+    border-color: #bee5eb;
+}
+
+.fresh-alert-warning {
+    color: #856404;
+    background-color: var(--fresh-warning);
+    border-color: #ffeeba;
+}
+
+.fresh-alert-success {
+    color: #155724;
+    background-color: var(--fresh-success);
+    border-color: #c3e6cb;
+}
+
+.fresh-alert-danger {
+    color: #721c24;
+    background-color: var(--fresh-danger);
+    border-color: #f5c6cb;
+}

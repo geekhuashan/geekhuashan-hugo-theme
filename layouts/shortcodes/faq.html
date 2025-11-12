@@ -1,0 +1,47 @@
+{{- /*
+FAQ Shortcode for AI Agent SEO Optimization
+Usage:
+{{< faq >}}
+{{< faq-item question="问题1" >}}
+答案1
+{{< /faq-item >}}
+{{< faq-item question="问题2" >}}
+答案2
+{{< /faq-item >}}
+{{< /faq >}}
+*/ -}}
+
+{{- .Page.Scratch.Set "faq_items" slice -}}
+{{- .Inner -}}
+{{- $faq_items := .Page.Scratch.Get "faq_items" -}}
+
+{{- if gt (len $faq_items) 0 -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{- range $index, $item := $faq_items -}}
+    {{- if $index }},{{ end }}
+    {
+      "@type": "Question",
+      "name": {{ $item.question | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ $item.answer | plainify | jsonify }}
+      }
+    }
+    {{- end -}}
+  ]
+}
+</script>
+
+<div class="faq-container">
+  {{- range $faq_items -}}
+  <div class="faq-item">
+    <h3 class="faq-question">{{ .question }}</h3>
+    <div class="faq-answer">{{ .answer | markdownify }}</div>
+  </div>
+  {{- end -}}
+</div>
+{{- end -}}

@@ -1,0 +1,97 @@
+{{- /* Video Shortcode - 支持多平台视频播放 */ -}}
+
+{{- $platform := .Get "platform" -}}
+{{- $src := .Get "src" -}}
+{{- $vid := .Get "vid" -}}
+{{- $poster := .Get "poster" -}}
+{{- $caption := .Get "caption" -}}
+{{- $width := .Get "width" | default "100%" -}}
+{{- $height := .Get "height" -}}
+{{- $autoplay := .Get "autoplay" | default false -}}
+{{- $loop := .Get "loop" | default false -}}
+{{- $muted := .Get "muted" | default false -}}
+{{- $controls := .Get "controls" | default true -}}
+{{- $preload := .Get "preload" | default "metadata" -}}
+
+<div class="video-container" {{- if $width }} style="max-width: {{ $width }};"{{- end }}>
+  {{- if $platform -}}
+    {{- /* 第三方平台视频 */ -}}
+    {{- if eq $platform "bilibili" -}}
+      <div class="video-wrapper video-wrapper-16x9">
+        <iframe
+          src="https://player.bilibili.com/player.html?bvid={{ $vid }}&page=1&high_quality=1&danmaku=0"
+          scrolling="no"
+          border="0"
+          frameborder="no"
+          framespacing="0"
+          allowfullscreen="true"
+          sandbox="allow-scripts allow-same-origin allow-presentation"
+          loading="lazy">
+        </iframe>
+      </div>
+    {{- else if eq $platform "youtube" -}}
+      <div class="video-wrapper video-wrapper-16x9">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/{{ $vid }}?rel=0&modestbranding=1"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+    {{- else if eq $platform "vimeo" -}}
+      <div class="video-wrapper video-wrapper-16x9">
+        <iframe
+          src="https://player.vimeo.com/video/{{ $vid }}?title=0&byline=0&portrait=0"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+    {{- end -}}
+  {{- else if $src -}}
+    {{- /* HTML5 视频播放器（本地/R2） */ -}}
+    <div class="video-wrapper">
+      <video
+        {{- if $poster }} poster="{{ $poster | relURL }}"{{- end }}
+        {{- if $height }} height="{{ $height }}"{{- end }}
+        {{- if $autoplay }} autoplay{{- end }}
+        {{- if $loop }} loop{{- end }}
+        {{- if $muted }} muted{{- end }}
+        {{- if $controls }} controls{{- end }}
+        preload="{{ $preload }}"
+        playsinline
+        class="video-player"
+        {{- /* 添加 loading 属性以支持懒加载 */ -}}
+        loading="lazy">
+        {{- /* 多格式支持 */ -}}
+        {{- if strings.HasSuffix $src ".mp4" -}}
+          <source src="{{ $src | relURL }}" type="video/mp4">
+        {{- else if strings.HasSuffix $src ".webm" -}}
+          <source src="{{ $src | relURL }}" type="video/webm">
+        {{- else if strings.HasSuffix $src ".ogv" -}}
+          <source src="{{ $src | relURL }}" type="video/ogg">
+        {{- else -}}
+          {{- /* 默认当作 mp4 处理 */ -}}
+          <source src="{{ $src | relURL }}" type="video/mp4">
+        {{- end -}}
+        {{- /* 回退提示 */ -}}
+        <p class="video-fallback">
+          您的浏览器不支持 HTML5 视频。
+          <a href="{{ $src | relURL }}" download>点击下载视频</a>
+        </p>
+      </video>
+    </div>
+  {{- else -}}
+    {{- /* 错误提示 */ -}}
+    <div class="video-error">
+      <p>⚠️ 视频加载错误：请提供 <code>src</code> 或 <code>platform + vid</code> 参数</p>
+    </div>
+  {{- end -}}
+
+  {{- /* 视频说明文字 */ -}}
+  {{- if $caption -}}
+    <p class="video-caption">{{ $caption | markdownify }}</p>
+  {{- end -}}
+</div>

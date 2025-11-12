@@ -1,0 +1,682 @@
+/* 关于页面样式 - 炫技版 */
+
+/* 基础样式 */
+.about-page {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem;
+    animation-duration: 0.8s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景效果 */
+.about-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(65, 88, 208, 0.3) 0%, rgba(200, 80, 192, 0.2) 30.2%, rgba(255, 204, 112, 0.2) 70%),
+        linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    animation: backgroundPulse 15s infinite alternate;
+}
+
+@keyframes backgroundPulse {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(90deg);
+    }
+}
+
+/* 装饰元素 */
+.about-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: float 20s infinite ease-in-out;
+}
+
+.decoration-1 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(to right, #5f2c82, #49a09d);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.decoration-2 {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to right, #f5af19, #f12711);
+    bottom: -50px;
+    right: -50px;
+    animation-delay: 5s;
+}
+
+.decoration-3 {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    top: 40%;
+    right: -30px;
+    animation-delay: 10s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.05);
+    }
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.about-title {
+    font-size: 3.5rem;
+    margin-bottom: 0.8rem;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleEnter 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+@keyframes titleEnter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-description {
+    font-size: 1.3rem;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.5s forwards;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* 图片容器 */
+.about-image-container {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    perspective: 1000px;
+}
+
+.about-image {
+    max-width: 300px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: imageReveal 1.2s ease-out 0.2s backwards;
+    transform-style: preserve-3d;
+    position: relative;
+    z-index: 1;
+}
+
+.about-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(110, 142, 251, 0.4), rgba(167, 119, 227, 0.4));
+    z-index: 2;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.about-image:hover {
+    transform: translateY(-10px) rotateY(5deg);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
+}
+
+.about-image:hover::after {
+    opacity: 1;
+}
+
+@keyframes imageReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 内容区域 */
+.about-content {
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    position: relative;
+    opacity: 0;
+    animation: contentFadeIn 1s ease-out 0.8s forwards;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-content h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInFromLeft 0.7s ease-out forwards;
+    animation-delay: calc(1s + var(--animation-order, 0) * 0.2s);
+}
+
+.about-content h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary, #3b82f6);
+    opacity: 0;
+    transform: translateX(-15px);
+    animation: slideInFromLeft 0.7s ease-out forwards;
+    animation-delay: calc(1.2s + var(--animation-order, 0) * 0.2s);
+}
+
+.about-content p,
+.about-content ul {
+    animation: contentFadeIn 0.7s ease-out forwards;
+    animation-delay: calc(1.4s + var(--animation-order, 0) * 0.1s);
+    opacity: 0;
+}
+
+@keyframes contentFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 增强社交链接 */
+.about-social {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transform: translateY(30px);
+    opacity: 0;
+    animation: sectionSlideUp 0.8s ease-out 1.2s forwards;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-social h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, var(--gradient-start, #4facfe), var(--gradient-end, #00f2fe));
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--gradient-end, #00f2fe), var(--gradient-start, #4facfe));
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.social-link:hover::before {
+    transform: translateX(100%);
+}
+
+.social-icon {
+    margin-right: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.social-link[href*="github"] {
+    --gradient-start: #6e5494;
+    --gradient-end: #4078c0;
+}
+
+.social-link[href*="twitter"] {
+    --gradient-start: #1DA1F2;
+    --gradient-end: #19608F;
+}
+
+.social-link[href*="mail"] {
+    --gradient-start: #EA4335;
+    --gradient-end: #FBBC05;
+}
+
+/* 技能展示增强 */
+.about-skills {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transform: translateY(30px);
+    opacity: 0;
+    animation: sectionSlideUp 0.8s ease-out 1.4s forwards;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-skills h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-item {
+    opacity: 0;
+    transform: scale(0.9);
+    animation: skillAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: calc(1.6s + var(--skill-order, 0) * 0.1s);
+}
+
+@keyframes skillAppear {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.skill-name {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.skill-percentage {
+    color: var(--primary, #3b82f6);
+    font-weight: bold;
+}
+
+.skill-bar {
+    height: 12px;
+    background-color: rgba(229, 231, 235, 0.3);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gradient-start, #4facfe), var(--gradient-end, #00f2fe));
+    border-radius: 6px;
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    box-shadow: 0 0 10px rgba(var(--primary-rgb, 59, 130, 246), 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    animation: shimmer 2s infinite;
+    transform: skewX(-20deg);
+}
+
+@keyframes shimmer {
+    from {
+        transform: translateX(-100%) skewX(-20deg);
+    }
+
+    to {
+        transform: translateX(200%) skewX(-20deg);
+    }
+}
+
+/* 设置不同的技能条颜色 */
+.skill-item:nth-child(1) .skill-progress {
+    --gradient-start: #4facfe;
+    --gradient-end: #00f2fe;
+}
+
+.skill-item:nth-child(2) .skill-progress {
+    --gradient-start: #6e8efb;
+    --gradient-end: #a777e3;
+}
+
+.skill-item:nth-child(3) .skill-progress {
+    --gradient-start: #f5af19;
+    --gradient-end: #f12711;
+}
+
+.skill-item:nth-child(4) .skill-progress {
+    --gradient-start: #43e97b;
+    --gradient-end: #38f9d7;
+}
+
+.skill-item:nth-child(5) .skill-progress {
+    --gradient-start: #fa709a;
+    --gradient-end: #fee140;
+}
+
+/* 时间线增强 */
+.about-timeline {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transform: translateY(30px);
+    opacity: 0;
+    animation: sectionSlideUp 0.8s ease-out 1.6s forwards;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-timeline h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #6e8efb, #a777e3);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(110, 142, 251, 0.5);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: timelineItemAppear 0.6s ease-out forwards;
+    animation-delay: calc(1.8s + var(--timeline-order, 0) * 0.2s);
+}
+
+@keyframes timelineItemAppear {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    box-shadow: 0 0 15px rgba(110, 142, 251, 0.7);
+    z-index: 1;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -3rem - 0.35rem;
+    top: 0.5rem - 0.35rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: rgba(110, 142, 251, 0.2);
+    animation: pulseRing 2s infinite;
+    z-index: 0;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+
+    70% {
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+.timeline-date {
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+    color: #a777e3;
+    font-size: 1.1rem;
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(110, 142, 251, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(110, 142, 251, 0.2);
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h4 {
+    margin-top: 0;
+    margin-bottom: 0.7rem;
+    font-size: 1.3rem;
+    color: var(--primary, #3b82f6);
+}
+
+.timeline-content p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+@keyframes sectionSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .about-title {
+        font-size: 2.5rem;
+    }
+
+    .about-description {
+        font-size: 1.1rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-item::before {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    .timeline-item::after {
+        left: -3rem - 0.25rem;
+        top: 0.5rem - 0.25rem;
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+
+    .about-social,
+    .about-skills,
+    .about-timeline {
+        padding: 1.5rem;
+    }
+
+    .social-links {
+        gap: 1rem;
+    }
+
+    .social-link {
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+/* 深色模式适配 */
+.dark .about-background {
+    opacity: 0.1;
+}
+
+.dark .about-social,
+.dark .about-skills,
+.dark .about-timeline {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.dark .skill-bar {
+    background-color: rgba(75, 85, 99, 0.3);
+}
+
+.dark .timeline-content {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.animated {
+    animation-fill-mode: both;
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}

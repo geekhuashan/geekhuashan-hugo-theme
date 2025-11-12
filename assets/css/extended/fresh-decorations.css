@@ -1,0 +1,110 @@
+/* 
+ * 小清新主题 - 装饰元素
+ * 添加一些小清新风格的视觉装饰效果
+ */
+
+/* 顶部装饰 */
+.fresh-decoration-top {
+    height: 6px;
+    background: linear-gradient(to right,
+            var(--fresh-primary-light),
+            var(--fresh-primary),
+            var(--fresh-accent-green),
+            var(--fresh-accent-yellow),
+            var(--fresh-accent-pink),
+            var(--fresh-primary));
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* 底部装饰 */
+.fresh-decoration-bottom {
+    height: 4px;
+    background: linear-gradient(to right,
+            var(--fresh-primary),
+            var(--fresh-accent-pink),
+            var(--fresh-accent-yellow),
+            var(--fresh-accent-green),
+            var(--fresh-primary-light));
+    margin-top: 2rem;
+}
+
+/* 全局样式微调 */
+.fresh-theme {
+    font-family: var(--fresh-font-sans);
+}
+
+.fresh-main {
+    position: relative;
+    padding-top: 2rem;
+}
+
+/* 背景细微纹理 */
+.fresh-theme::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zM16.686 0L10.2 6.485 11.616 7.9l7.9-7.9h-2.83zm20.97 0l9.315 9.314-1.414 1.414L34.828 0h2.83zM22.344 0L13.03 9.314l1.414 1.414L25.172 0h-2.83zM32 0l12.142 12.142-1.414 1.414L30 .828 17.272 13.556l-1.414-1.414L28 0h4zM.284 0l28 28-1.414 1.414L0 2.544v2.83L26.272 32h-2.828L0 8.685v2.83L20.686 32h-2.83L0 14.97v2.83L15.1 32h-2.83L0 20.253v2.828L9.513 32H6.684L0 25.627v2.828L3.828 32H0v-3.03L0 0h.284zM0 0h-.828L0 .828V0zm0 0h.828L0 .828V0zm54.627 0L56 1.372v2.83L52.143 0h2.484zm5.087 0L60 .258v2.83L56.143 0h3.57zM60 5.543V0h-5.72L60 5.542zm0 5.457l-5.143-5.143v-2.83L60 8.372v2.628zm0 5.143L49.428 5.714 48.014 7.13 60 19.113v-2.97zM60 32l-5.143-5.143v-2.83L60 29.37v2.63zm0-9.713L43.857 5.714 42.443 7.13 60 24.685v-2.398zM60 32L30.857 2.857 29.443 4.27 60 34.828V32zm0-9.713L38.857 5.714 37.443 7.13 60 29.685v-2.398zM60 32L25.857 2.857 24.443 4.27 60 39.827V32zm0-9.713l-21.143-21.143L37.443 2.73 60 25.284v-2.997zM60 32L20.857 2.857 19.443 4.27 60 44.827V32zm0-9.713L15.857 1.143 14.443 2.56 60 48.114v-26.4z' fill='%23c5c5c5' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 标题装饰 */
+.post h1::before,
+.post h2::before,
+.post h3::before {
+    content: '✿';
+    color: var(--fresh-primary-light);
+    margin-right: 0.5rem;
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+/* 列表项美化 */
+.post-content ul li::marker {
+    color: var(--fresh-primary);
+}
+
+/* 引用美化 */
+.post-content blockquote {
+    border-left-color: var(--fresh-primary-light) !important;
+    background-color: rgba(168, 208, 245, 0.1) !important;
+    border-radius: 0 var(--fresh-radius-md) var(--fresh-radius-md) 0 !important;
+}
+
+/* 代码块美化 */
+.post-content pre {
+    border-radius: var(--fresh-radius-md) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 表格美化 */
+.post-content table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: var(--fresh-radius-md) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+.post-content table th {
+    background-color: var(--fresh-primary-light) !important;
+    color: #fff !important;
+}
+
+.post-content table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+/* 分割线美化 */
+.post-content hr {
+    border: 0 !important;
+    height: 1px !important;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--fresh-primary-light), rgba(0, 0, 0, 0)) !important;
+    margin: 2rem 0 !important;
+}

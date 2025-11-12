@@ -1,0 +1,23 @@
+{
+  "name": "hugo-ga4-pageviews",
+  "version": "1.0.0",
+  "description": "Cloudflare Workers - Google Analytics 4 页面浏览量统计 API",
+  "main": "pageviews.js",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail"
+  },
+  "keywords": [
+    "cloudflare-workers",
+    "google-analytics",
+    "ga4",
+    "pageviews",
+    "hugo"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

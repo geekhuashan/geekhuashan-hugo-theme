@@ -1,0 +1,100 @@
+/* 浏览器兼容性修复 */
+
+/* IE11 和旧版Edge修复 */
+.no-grid .post-content {
+    display: block; /* 回退到块布局 */
+}
+
+.no-grid .tags-list,
+.no-grid .buttons,
+.no-flex .tags-list,
+.no-flex .buttons {
+    display: block;
+}
+
+.no-grid .tag-item,
+.no-flex .tag-item {
+    display: inline-block;
+    margin: 0 0.5rem 0.5rem 0;
+}
+
+.no-grid .button,
+.no-flex .button {
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+/* Safari修复 */
+.is-safari .header {
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Firefox特定样式 */
+.is-firefox .post-content {
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) transparent;
+}
+
+/* IE特定的回退样式 */
+.is-ie img {
+    max-width: 100%;
+    height: auto;
+}
+
+.is-ie .entry-cover img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+/* 移动浏览器特别修复 */
+.is-ios input[type="text"],
+.is-ios input[type="search"],
+.is-ios textarea,
+.is-android input[type="text"],
+.is-android input[type="search"],
+.is-android textarea {
+    font-size: 16px; /* 防止在移动设备上输入时自动放大 */
+}
+
+/* CSS变量不支持时的回退颜色 */
+.post-content {
+    color: #333; /* 回退文本颜色 */
+}
+
+.header {
+    background-color: #fff; /* 回退背景色 */
+    border-bottom: 1px solid #eee; /* 回退边框 */
+}
+
+body {
+    background-color: #f7f7f7; /* 回退背景色 */
+}
+
+/* 针对不支持粘性定位的浏览器 */
+.no-sticky .toc {
+    position: relative;
+    top: 0;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    a {
+        text-decoration: none !important;
+        color: #000 !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+    }
+    
+    @page {
+        margin: 2cm;
+    }
+}

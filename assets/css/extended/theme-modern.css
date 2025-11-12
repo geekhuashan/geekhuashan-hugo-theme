@@ -1,0 +1,683 @@
+/* 
+ * 极简优雅主题
+ * 简约、大气、现代设计
+ */
+
+:root {
+    /* 黑白主题色彩 - 优化对比度 */
+    --modern-black: #111111;
+    --modern-dark: #333333;
+    --modern-gray-dark: #555555;
+    --modern-gray: #555555;
+    /* 链接颜色 - 优化对比度从 4.1:1 到 7.0:1 (WCAG AA 合格) */
+    --modern-gray-light: #AAAAAA;
+    --modern-light: #F8F8F8;
+    --modern-white: #FFFFFF;
+
+    /* 强调色 - 保持极简 */
+    --modern-accent: #000000;
+
+    /* 字体系统 - 优化排版 */
+    --modern-font-sans: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --modern-font-serif: "New York", Georgia, "Times New Roman", serif;
+    --modern-font-mono: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+    /* 间距单位 - 更灵活的比例 */
+    --modern-space-xs: 0.5rem;
+    --modern-space-sm: 1rem;
+    --modern-space-md: 2rem;
+    --modern-space-lg: 4rem;
+    --modern-space-xl: 8rem;
+
+    /* 圆角 */
+    --modern-radius-sm: 2px;
+    --modern-radius-md: 4px;
+    --modern-radius-lg: 8px;
+
+    /* 动画 */
+    --modern-transition: all 0.3s ease;
+
+    /* 阴影 - 更微妙 */
+    --modern-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --modern-shadow-md: 0 3px 12px rgba(0, 0, 0, 0.04);
+    --modern-shadow-lg: 0 5px 30px rgba(0, 0, 0, 0.05);
+
+    /* 图层 */
+    --modern-z-header: 100;
+    --modern-z-menu: 90;
+    --modern-z-top: 80;
+}
+
+body.dark {
+    --modern-black: #f1f1f1;
+    --modern-dark: #dcdcdc;
+    --modern-gray-dark: #b5b5b5;
+    --modern-gray: #989898;
+    --modern-gray-light: #6f6f6f;
+    --modern-light: #1e1e1e;
+    --modern-white: #121212;
+    --modern-accent: #ffffff;
+
+    --primary-color: var(--modern-black);
+    --content-color: #e6e6e6;
+    --post-meta-color: #9f9f9f;
+    --footer-color: #9f9f9f;
+    --border-color: rgba(255, 255, 255, 0.08);
+
+    --modern-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+    --modern-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.45);
+    --modern-shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.55);
+}
+
+/* 全局重置 */
+html {
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: var(--modern-font-sans);
+    color: var(--modern-dark);
+    background-color: var(--modern-white);
+    line-height: 1.7;
+    letter-spacing: -0.011em;
+    font-weight: 400;
+    margin: 0;
+    padding-top: 5rem;
+}
+
+body.dark {
+    color: var(--modern-dark);
+    background-color: var(--modern-white);
+}
+
+.modern-theme * {
+    box-sizing: border-box;
+}
+
+/* 修改基础主题颜色 */
+:root {
+    --primary-color: var(--modern-black);
+    --content-color: var(--modern-dark);
+    --post-meta-color: var(--modern-gray);
+    --footer-color: var(--modern-gray);
+    --border-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 页面布局 - 增加桌面端宽度 */
+.fresh-container,
+.main,
+.modern-container {
+    max-width: 900px;
+    /* 增加宽度 */
+    margin: 0 auto;
+    padding: 0 var(--modern-space-sm);
+}
+
+/* 标题排版 - 细腻控制 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--modern-black);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.022em;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+h1,
+.post-title {
+    font-size: 2.5rem;
+    letter-spacing: -0.03em;
+    margin-top: var(--modern-space-lg);
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.post-single h1 {
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.7rem;
+    position: relative;
+    margin-top: 3.5rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+}
+
+/* 移除花哨的标题装饰 */
+.post h1::before,
+.post h2::before,
+.post h3::before {
+    display: none;
+}
+
+/* 段落和间距优化 */
+p {
+    margin-bottom: 1.7rem;
+    font-weight: 400;
+}
+
+/* 文本选择样式 */
+::selection {
+    background: var(--modern-black);
+    color: var(--modern-white);
+    text-shadow: none;
+}
+
+/* 链接样式 - 简洁有品味 */
+a {
+    color: var(--modern-black);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.content a:not(.post-entry a) {
+    background-image: linear-gradient(transparent calc(100% - 2px), currentColor 2px);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.2s ease;
+    text-decoration: none;
+}
+
+.content a:not(.post-entry a):hover {
+    background-size: 100% 100%;
+}
+
+/* 优化导航栏 */
+.header {
+    background: var(--modern-white);
+    box-shadow: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    height: 5rem !important;
+    z-index: var(--modern-z-header);
+    display: flex;
+    align-items: center;
+}
+
+.nav {
+    height: auto;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--modern-space-sm);
+}
+
+.logo {
+    flex: 1;
+}
+
+.nav .logo a {
+    color: var(--modern-black) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+    font-size: 1.5rem !important;
+    position: relative;
+    display: inline-block;
+}
+
+.nav .logo a:hover {
+    transform: none !important;
+    opacity: 0.8;
+}
+
+/* 菜单项样式 */
+#menu {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.5rem;
+}
+
+#menu li {
+    margin: 0 !important;
+}
+
+#menu li a {
+    padding: 0 !important;
+    position: relative;
+    color: var(--modern-gray-dark);
+}
+
+#menu li a span {
+    position: relative;
+    transition: all 0.2s ease;
+    padding: 0.3rem 0.5rem;
+    border-radius: 3px;
+}
+
+#menu li a:hover span {
+    color: var(--modern-black) !important;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* 使用背景色作为选中状态指示器，而非下划线 */
+#menu li a span.active {
+    font-weight: 600 !important;
+    color: var(--modern-black) !important;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 移除下划线 */
+#menu li a span.active:after {
+    display: none;
+}
+
+/* 文章样式 */
+.post-content {
+    margin-top: var(--modern-space-md);
+    margin-bottom: 6rem;
+}
+
+/* 文章条目卡片 */
+.post-entry {
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    margin-bottom: var(--modern-space-md) !important;
+    padding-bottom: var(--modern-space-md) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    transition: transform 0.2s ease;
+}
+
+.post-entry:hover {
+    transform: translateX(3px);
+}
+
+.post-entry .entry-header {
+    margin-bottom: 0.5rem;
+}
+
+.post-entry .entry-header h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+}
+
+.post-entry .entry-content {
+    color: var(--modern-gray) !important;
+    font-size: 0.95rem;
+    margin: 0.5rem 0 1rem;
+}
+
+.entry-footer {
+    color: var(--modern-gray-light);
+    font-size: 0.85rem;
+}
+
+/* 引用块 - 更优雅 */
+blockquote {
+    border-left: 3px solid var(--modern-black) !important;
+    padding: 0.5rem 0 0.5rem 1.5rem !important;
+    margin: 2rem 0 2rem 0 !important;
+    font-style: italic !important;
+    font-family: var(--modern-font-serif) !important;
+    color: var(--modern-gray-dark) !important;
+    background-color: transparent !important;
+}
+
+blockquote p {
+    margin-bottom: 0.8rem;
+}
+
+blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* 代码块样式 - 简化版,避免与code-simple.css冲突 */
+/* 注意: 代码块主样式由code-simple.css控制 */
+/* 这里只保留必要的字体定义 */
+code {
+    font-family: var(--modern-font-mono);
+}
+
+/* 移除所有!important和重复的样式定义 */
+/* pre和pre code的样式完全由code-simple.css控制 */
+
+/* 表格样式 - 更专业 */
+table {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    margin: 2rem 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px !important;
+    scrollbar-width: none !important; /* Firefox 隐藏滚动条 */
+    -ms-overflow-style: none !important; /* IE/Edge 隐藏滚动条 */
+}
+
+/* Chrome/Safari 隐藏表格滚动条 */
+table::-webkit-scrollbar {
+    display: none !important;
+}
+
+th {
+    background-color: var(--modern-light) !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+    padding: 0.8rem 1rem !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: var(--modern-black) !important;
+}
+
+td {
+    padding: 0.8rem 1rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    vertical-align: top !important;
+}
+
+tr:last-child td {
+    border-bottom: none !important;
+}
+
+tr:hover {
+    background-color: rgba(0, 0, 0, 0.01) !important;
+}
+
+/* 分割线 - 更精致 */
+hr {
+    height: 1px !important;
+    background-color: var(--border-color) !important;
+    border: none !important;
+    margin: 3rem 0 !important;
+}
+
+/* 列表样式优化 */
+ul,
+ol {
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+li::marker {
+    color: var(--modern-gray-dark);
+}
+
+/* 图片处理 */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+    margin: 2rem auto;
+}
+
+figure {
+    margin: 2rem 0;
+}
+
+figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--modern-gray);
+    margin-top: 0.5rem;
+}
+
+/* 移动端优化 - 添加动态隐藏目录功能 */
+@media (max-width: 767px) {
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        padding-top: 4rem;
+    }
+
+    .header {
+        height: 4rem !important;
+    }
+
+    h1,
+    .post-title {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .nav .logo a {
+        font-size: 1.3rem !important;
+    }
+
+    #menu {
+        gap: 1rem;
+    }
+}
+
+/* 页脚优化 */
+.footer {
+    padding: var(--modern-space-md) 0;
+    color: var(--modern-gray);
+    font-size: 0.85rem;
+    text-align: center;
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: auto;
+    line-height: 24px;
+}
+
+.footer a {
+    color: var(--modern-gray);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.footer a:hover {
+    border-bottom-color: var(--modern-black);
+    color: var(--modern-black);
+}
+
+.footer span {
+    margin-inline-start: 1px;
+    margin-inline-end: 1px;
+}
+
+/* 按钮组件优化 */
+.fresh-btn {
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    background-color: var(--modern-black);
+    color: var(--modern-white);
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.01em;
+}
+
+.fresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--modern-shadow-md);
+}
+
+.fresh-btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--modern-black);
+    color: var(--modern-black);
+}
+
+/* 卡片组件优化 */
+.fresh-card {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 2rem 0;
+    box-shadow: var(--modern-shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fresh-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--modern-shadow-md);
+}
+
+.fresh-card-header {
+    padding: 1.2rem 1.5rem;
+    background-color: var(--modern-light);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.1rem;
+}
+
+.fresh-card-body {
+    padding: 1.5rem;
+}
+
+/* 警告框组件优化 */
+.fresh-alert {
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--modern-black);
+    background: var(--modern-light);
+}
+
+.fresh-alert-info {
+    border-color: #2d7bb7;
+    background: rgba(45, 123, 183, 0.05);
+}
+
+.fresh-alert-success {
+    border-color: #2e7d32;
+    background: rgba(46, 125, 50, 0.05);
+}
+
+.fresh-alert-warning {
+    border-color: #ed6c02;
+    background: rgba(237, 108, 2, 0.05);
+}
+
+.fresh-alert-danger {
+    border-color: #d32f2f;
+    background: rgba(211, 47, 47, 0.05);
+}
+
+/* 搜索按钮样式优化 - 简化为和其他菜单项一样 */
+#menu li a[title*="搜索"] span,
+#menu li a[title*="Search"] span {
+    background-color: transparent !important;
+    color: var(--modern-gray-dark) !important;
+    padding: 0.3rem 0.5rem !important;
+    border-radius: 3px !important;
+    font-size: inherit !important;
+}
+
+#menu li a[title*="搜索"]:hover span,
+#menu li a[title*="Search"]:hover span {
+    color: var(--modern-black) !important;
+    opacity: 1 !important;
+}
+
+#menu li a[title*="搜索"] span.active,
+#menu li a[title*="Search"] span.active {
+    color: var(--primary) !important;
+    background-color: transparent !important;
+}
+
+/* 回到顶部按钮 */
+.top-link {
+    background-color: var(--modern-black) !important;
+    color: var(--modern-white) !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 0 !important;
+    transform: translateY(10px) !important;
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+    box-shadow: var(--modern-shadow-md) !important;
+}
+
+.top-link.show {
+    opacity: 0.7 !important;
+    transform: translateY(0) !important;
+}
+
+.top-link:hover {
+    opacity: 1 !important;
+    transform: translateY(-2px) !important;
+}
+
+.top-link svg {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+/* 文章详情页元信息 */
+.post-meta {
+    color: var(--modern-gray);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+/* 恢复文章标签 */
+.post-tags {
+    display: block !important;
+    margin-top: 2rem;
+}
+
+.post-tags a {
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--modern-gray);
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.post-tags a:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+    color: var(--modern-black);
+    transform: translateY(-1px);
+}
+
+/* 移除不必要的页面装饰元素 */
+.fresh-decoration-top,
+.fresh-decoration-bottom {
+    display: none;
+}
+
+/* 隐藏评论系统 */
+.comment-container,
+#comments,
+#twikoo,
+.post-comment {
+    display: none !important;
+}

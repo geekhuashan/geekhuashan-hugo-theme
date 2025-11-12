@@ -1,0 +1,56 @@
+.buttons,
+.main .profile {
+    display: flex;
+    justify-content: center;
+}
+
+.main .profile {
+    align-items: center;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height) - (var(--gap) * 2));
+    text-align: center;
+    width: 100%;
+}
+
+.profile .profile_inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    padding: 0 var(--gap);
+    box-sizing: border-box;
+}
+
+.profile img {
+    border-radius: 50%;
+}
+
+.buttons {
+    flex-wrap: wrap;
+    max-width: 800px; /* 增大以容纳4列布局 */
+    gap: 12px;
+}
+
+.button {
+    background: var(--tertiary);
+    border-radius: var(--radius);
+    padding: 6px;
+    transition: transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 1 calc(25% - 9px); /* 桌面端默认4列布局 */
+    min-width: 120px; /* 降低最小宽度以适应4列 */
+}
+
+.button-inner {
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:active {
+    transform: scale(0.96);
+}

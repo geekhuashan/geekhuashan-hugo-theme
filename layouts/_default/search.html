@@ -1,0 +1,142 @@
+{{- define "main" }}
+
+<header class="page-header">
+    <h1>{{- (printf "%s&nbsp;" .Title ) | htmlUnescape -}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+        {{- partial "translation_list.html" . -}}
+    </div>
+    {{- end }}
+</header>
+
+<div id="searchbox">
+    <input id="searchInput" autofocus placeholder="{{ .Params.placeholder | default (printf "%s ↵" .Title) }}"
+        aria-label="search" type="search" autocomplete="off" maxlength="64">
+    <ul id="searchResults" aria-label="search results"></ul>
+</div>
+
+{{- /* 搜索页面增强内容 */ -}}
+{{- /* 预先计算所有分类的文章数量 */ -}}
+{{- $pages := where .Site.RegularPages "Type" "posts" -}}
+{{- $techPages := slice -}}
+{{- $readPages := slice -}}
+{{- $lifePages := slice -}}
+{{- $projectPages := slice -}}
+
+{{- range $pages -}}
+    {{- if .File -}}
+        {{- $dir := path.Dir .File.Path -}}
+        {{- if in $dir "posts/tech" -}}
+            {{- $techPages = $techPages | append . -}}
+        {{- else if in $dir "posts/read" -}}
+            {{- $readPages = $readPages | append . -}}
+        {{- else if in $dir "posts/life" -}}
+            {{- $lifePages = $lifePages | append . -}}
+        {{- else if in $dir "posts/project" -}}
+            {{- $projectPages = $projectPages | append . -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+<div class="search-enhancements">
+    {{- /* 文章统计 */ -}}
+    <div class="search-stats">
+        <h3>📊 站点统计</h3>
+        <div class="stats-grid">
+
+            <div class="stat-item">
+                <span class="stat-number">{{ len $pages }}</span>
+                <span class="stat-label">篇文章</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ len $techPages }}</span>
+                <span class="stat-label">技术</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ len $readPages }}</span>
+                <span class="stat-label">阅读</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ len $lifePages }}</span>
+                <span class="stat-label">生活</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ len $projectPages }}</span>
+                <span class="stat-label">项目</span>
+            </div>
+        </div>
+    </div>
+
+    {{- /* 热门标签 */ -}}
+    {{- if .Site.Taxonomies.tags }}
+    <div class="search-tags">
+        <h3>🏷️ 热门标签</h3>
+        <div class="tag-cloud">
+            {{- range $name, $taxonomy := .Site.Taxonomies.tags }}
+            {{- if ge (len $taxonomy.Pages) 2 }}
+            <a href="{{ "tags/" | relLangURL }}{{ $name | urlize }}" class="tag-item"
+               data-count="{{ len $taxonomy.Pages }}">
+                {{ $name }}
+                <span class="tag-count">{{ len $taxonomy.Pages }}</span>
+            </a>
+            {{- end }}
+            {{- end }}
+        </div>
+    </div>
+    {{- end }}
+
+    {{- /* 快速分类入口 */ -}}
+    <div class="search-categories">
+        <h3>📚 快速浏览</h3>
+        <div class="category-cards">
+            <a href="{{ "posts/tech" | relLangURL }}" class="category-card tech-card">
+                <span class="category-icon">💻</span>
+                <span class="category-name">技术文章</span>
+                <span class="category-count">{{ len $techPages }} 篇</span>
+            </a>
+            <a href="{{ "posts/read" | relLangURL }}" class="category-card read-card">
+                <span class="category-icon">📕</span>
+                <span class="category-name">阅读笔记</span>
+                <span class="category-count">{{ len $readPages }} 篇</span>
+            </a>
+            <a href="{{ "posts/life" | relLangURL }}" class="category-card life-card">
+                <span class="category-icon">🎬</span>
+                <span class="category-name">生活随想</span>
+                <span class="category-count">{{ len $lifePages }} 篇</span>
+            </a>
+            <a href="{{ "posts/project" | relLangURL }}" class="category-card project-card">
+                <span class="category-icon">💼</span>
+                <span class="category-name">工作项目</span>
+                <span class="category-count">{{ len $projectPages }} 篇</span>
+            </a>
+        </div>
+    </div>
+
+    {{- /* 最近更新 */ -}}
+    <div class="search-recent">
+        <h3>⏰ 最近更新</h3>
+        <ul class="recent-posts">
+            {{- range first 5 (where .Site.RegularPages "Type" "posts").ByLastmod.Reverse }}
+            <li>
+                <a href="{{ .Permalink }}">
+                    <span class="recent-title">{{ .Title }}</span>
+                    <span class="recent-date">{{ .Lastmod.Format "2006-01-02" }}</span>
+                </a>
+            </li>
+            {{- end }}
+        </ul>
+    </div>
+</div>
+
+{{- end }}{{/* end main */}}

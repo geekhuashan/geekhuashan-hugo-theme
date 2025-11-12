@@ -1,0 +1,19 @@
+{{- define "main" }}
+
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+</header>
+
+<!-- 标签云 -->
+<div class="tags-cloud">
+    <div class="tags-list">
+        {{- range .Site.Taxonomies.tags.Alphabetical }}
+        <a href="{{ .Page.RelPermalink }}" class="tag-item">
+            {{ .Page.Title }}
+            <span class="tag-count">{{ .Count }}</span>
+        </a>
+        {{- end }}
+    </div>
+</div>
+
+{{- end }}{{/* end main */}}

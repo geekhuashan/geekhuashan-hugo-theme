@@ -1,0 +1,65 @@
+/* 图片懒加载相关样式 */
+
+/* 懒加载图片的淡入动画 */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+img.lazy.loaded {
+    opacity: 1;
+}
+
+/* 图片占位符样式 */
+.image-placeholder {
+    background-color: var(--border);
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.image-placeholder::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(300%);
+    }
+}
+
+/* 响应式图片容器 */
+.responsive-img-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 默认比例 */
+    overflow: hidden;
+    background-color: var(--border);
+    border-radius: 4px;
+}
+
+.responsive-img-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.responsive-img-container:hover img {
+    transform: scale(1.03);
+}

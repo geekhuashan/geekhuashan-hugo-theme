@@ -1,0 +1,39 @@
+{{- $currentPage := . -}}
+{{- $backlinks := slice -}}
+
+{{- /* 遍历所有文章，查找引用当前文章的 */ -}}
+{{- range where site.RegularPages "Section" "posts" -}}
+  {{- if ne . $currentPage -}}
+    {{- $content := .RawContent -}}
+
+    {{- /* 构建匹配模式：[[文件名]] 或 [[xxx|文件名]] */ -}}
+    {{- $pattern1 := printf `\[\[%s\]\]` $currentPage.File.ContentBaseName -}}
+    {{- $pattern2 := printf `\[\[.*?\|%s\]\]` $currentPage.File.ContentBaseName -}}
+
+    {{- if or (findRE $pattern1 $content 1) (findRE $pattern2 $content 1) -}}
+      {{- $backlinks = $backlinks | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if gt (len $backlinks) 0 -}}
+<section class="backlinks-section">
+  <h3 class="backlinks-title">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+    </svg>
+    被 {{ len $backlinks }} 篇文章引用
+  </h3>
+  <ul class="backlinks-list">
+    {{- range $backlinks -}}
+    <li class="backlink-item">
+      <a href="{{ .RelPermalink }}" class="backlink-title">{{ .Title }}</a>
+      {{- if .Summary -}}
+      <p class="backlink-excerpt">{{ .Summary | plainify | truncate 80 }}</p>
+      {{- end -}}
+    </li>
+    {{- end -}}
+  </ul>
+</section>
+{{- end -}}

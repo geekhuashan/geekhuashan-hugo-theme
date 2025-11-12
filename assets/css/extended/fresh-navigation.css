@@ -1,0 +1,105 @@
+/* 
+ * 小清新主题 - 导航栏样式
+ * 美化导航栏，使其更符合小清新风格
+ */
+
+/* 导航栏整体样式 */
+.header {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    transition: var(--fresh-transition);
+    position: sticky;
+    z-index: 99;
+    height: 60px;
+}
+
+/* 导航栏Logo */
+.nav .logo a {
+    color: var(--fresh-primary);
+    font-weight: 700;
+    font-size: 1.4rem;
+    transition: var(--fresh-transition);
+}
+
+.nav .logo a:hover {
+    color: var(--fresh-primary-dark);
+    transform: scale(1.05);
+}
+
+/* 导航菜单 - 桌面端基础样式 */
+#menu {
+    display: flex;
+    align-items: center;
+}
+
+#menu li {
+    margin: 0 0.2rem;
+}
+
+#menu li a {
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--fresh-radius-sm);
+    transition: var(--fresh-transition);
+}
+
+#menu li a:hover span {
+    color: var(--fresh-primary);
+}
+
+#menu li a span.active {
+    color: var(--fresh-primary);
+    font-weight: 600;
+}
+
+/* 主题切换按钮 */
+#theme-toggle {
+    background-color: transparent;
+    color: var(--fresh-text-secondary);
+    border-radius: var(--fresh-radius-sm);
+    padding: 0.3rem;
+    transition: var(--fresh-transition);
+}
+
+#theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: rotate(15deg);
+}
+
+/* 搜索按钮特殊样式 */
+#menu li a[title*="搜索"] span,
+#menu li a[title*="Search"] span {
+    background-color: var(--fresh-primary-light);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--fresh-radius-sm);
+    transition: var(--fresh-transition);
+}
+
+#menu li a[title*="搜索"]:hover span,
+#menu li a[title*="Search"]:hover span {
+    background-color: var(--fresh-primary);
+    transform: translateY(-2px);
+}
+
+/* 移动端菜单优化 - 基础样式，mobile-menu.css 会进一步覆盖 */
+@media (max-width: 767px) {
+    .logo {
+        position: absolute;
+        left: 1rem;
+    }
+
+    #menu {
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 0 0 var(--fresh-radius-md) var(--fresh-radius-md);
+    }
+
+    #menu li {
+        margin: 0.5rem 0;
+    }
+}

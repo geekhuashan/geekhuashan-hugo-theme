@@ -1,0 +1,813 @@
+/* 加载小清新主题样式 - 字体已移至 head.html 异步加载以优化性能 */
+
+/* =============================== */
+/* 代码块样式重构 */
+
+.post-content .highlight,
+.post-content pre:not(.chroma) {
+    position: relative !important;
+    margin: 2rem 0 !important;
+    border-radius: 14px !important;
+    /* overflow: hidden !important; 移除以允许移动端触摸滚动 */
+    background: linear-gradient(135deg, rgba(15, 19, 35, 0.96), rgba(33, 42, 68, 0.94)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 18px 40px rgba(8, 12, 24, 0.32) !important;
+}
+
+.post-content pre:not(.chroma) {
+    padding: 1.35rem 1.6rem 1.9rem !important;
+    font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+    color: rgba(226, 235, 255, 0.97) !important;
+    background: transparent !important;
+    white-space: pre !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y pan-x !important;
+    overscroll-behavior-x: contain !important;
+}
+
+.post-content .highlight {
+    padding: 0 !important;
+}
+
+.post-content .highlight .chroma {
+    display: block !important;
+    padding: 1.35rem 1.6rem 1.9rem !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y pan-x !important;
+    overscroll-behavior-x: contain !important;
+}
+
+.post-content .highlight pre,
+.post-content .highlight code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+    color: rgba(226, 235, 255, 0.97) !important;
+    background: transparent !important;
+    margin: 0 !important;
+    /* padding: 0 !important; */ /* 注释掉以允许code-simple.css控制padding */
+    border: none !important;
+    white-space: pre !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+}
+
+.post-content .highlight table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+}
+
+.post-content .highlight table td {
+    padding: 0 !important;
+}
+
+.post-content .highlight table.lntable td.lntd:first-child,
+.post-content .highlight table.lntable td.gutter,
+.post-content .highlight td.gutter,
+.chroma .ln,
+.chroma .lnt,
+.chroma .hl .ln,
+.chroma .hl .lnt {
+    display: none !important;
+}
+
+/* 装饰条已移除，改用蓝色渐变滚动条代替 */
+
+@media (max-width: 768px) {
+    .post-content .highlight,
+    .post-content pre:not(.chroma) {
+        margin-left: -1rem !important;
+        margin-right: -1rem !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .post-content .highlight .chroma,
+    .post-content pre:not(.chroma) {
+        padding-left: 1.15rem !important;
+        padding-right: 1.15rem !important;
+    }
+}
+
+body.dark .post-content .highlight,
+body.dark .post-content pre:not(.chroma) {
+    background: linear-gradient(135deg, rgba(17, 22, 39, 0.98), rgba(32, 41, 63, 0.95)) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55) !important;
+}
+
+body:not(.dark) .post-content .highlight,
+body:not(.dark) .post-content pre:not(.chroma) {
+    background: linear-gradient(135deg, rgba(245, 249, 255, 0.97), rgba(227, 238, 255, 0.95)) !important;
+    border: 1px solid rgba(46, 110, 255, 0.12) !important;
+    box-shadow: 0 16px 36px rgba(55, 112, 200, 0.15) !important;
+}
+
+body:not(.dark) .post-content .highlight pre,
+body:not(.dark) .post-content pre:not(.chroma),
+body:not(.dark) .post-content .highlight code {
+    color: #1f2a44 !important;
+}
+
+/* 亮色主题装饰条已移除，改用蓝色渐变滚动条代替 */
+
+
+body.dark .header {
+    background: var(--fresh-card-bg) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: none !important;
+}
+
+body.dark .first-entry {
+    background: linear-gradient(to right bottom, var(--fresh-primary-dark), var(--fresh-primary)) !important;
+}
+
+body.dark .post-entry {
+    background-color: rgba(40, 49, 65, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 10px 28px rgba(7, 9, 16, 0.55) !important;
+    color: var(--fresh-text) !important;
+}
+
+body.dark .post-entry:hover {
+    box-shadow: 0 18px 42px rgba(7, 9, 16, 0.6) !important;
+}
+
+body.dark .footer {
+    color: var(--fresh-text-secondary) !important;
+}
+
+body.dark .footer a {
+    border-bottom: 1px solid var(--fresh-text-secondary);
+}
+
+body.dark .footer a:hover {
+    border-bottom: 1px solid var(--fresh-primary);
+}
+
+body.dark #menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark .main {
+    background-color: transparent !important;
+}
+
+body.dark .post-entry .entry-header h2,
+body.dark .post-entry .entry-content,
+body.dark .post-entry .entry-footer,
+body.dark .post-meta,
+body.dark .post-description {
+    color: var(--fresh-text-secondary) !important;
+}
+
+body.dark .post-content,
+body.dark .post-content p,
+body.dark .post-content li,
+body.dark .post-content dl,
+body.dark .post-content dd {
+    color: var(--fresh-text) !important;
+}
+
+body.dark .post-content h1,
+body.dark .post-content h2,
+body.dark .post-content h3,
+body.dark .post-content h4,
+body.dark .post-content h5,
+body.dark .post-content h6 {
+    color: var(--primary) !important;
+}
+
+body.dark .post-content a {
+    color: var(--fresh-primary) !important;
+    box-shadow: 0 1px 0 rgba(141, 197, 247, 0.65) !important;
+}
+
+body.dark .post-content :not(pre)>code {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #f4f7ff !important;
+}
+
+body.dark .post-content blockquote {
+    border-inline-start: 3px solid rgba(141, 197, 247, 0.6) !important;
+    background-color: rgba(46, 55, 72, 0.6) !important;
+    color: var(--fresh-text-secondary) !important;
+}
+
+/* 首页标签 hover 配色优化（亮色模式） */
+.profile_inner .tag-item:hover,
+.tags-list .tag-item:hover {
+    background-color: rgba(34, 139, 230, 0.16) !important;
+    color: rgba(34, 87, 126, 0.95) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(34, 139, 230, 0.18);
+}
+
+body.dark .profile_inner .tag-item,
+body.dark .tags-list .tag-item {
+    background-color: rgba(40, 49, 65, 0.85) !important;
+    color: rgba(222, 229, 240, 0.92) !important;
+}
+
+body.dark .profile_inner .tag-item:hover,
+body.dark .tags-list .tag-item:hover {
+    background-color: rgba(34, 139, 230, 0.32) !important;
+    color: #f4faff !important;
+    box-shadow: 0 10px 24px rgba(13, 36, 48, 0.45);
+}
+
+/* 行内代码样式 */
+.post-content :not(pre)>code {
+    background-color: #f6f8fa !important;
+    border-radius: 3px !important;
+    font-size: 85% !important;
+    padding: 0.2em 0.4em !important;
+    color: #24292e !important;
+}
+
+/* 语法高亮样式已移至 chroma-styles.css(暗色) 和 chroma-light.css(亮色) */
+.chroma {
+    background-color: transparent !important;
+}
+
+/* 
+ * 小清新主题整合
+ * 下面的样式通过 CSS 变量进行覆盖，保持原有功能的同时美化界面
+ */
+
+/* 主题适配 - 让原主题采用小清新颜色 */
+:root {
+    --primary: var(--fresh-primary) !important;
+    --secondary: var(--fresh-text-secondary) !important;
+    --content: var(--fresh-text) !important;
+    --border: var(--fresh-border) !important;
+    --theme: var(--fresh-bg) !important;
+    --entry: var(--fresh-card-bg) !important;
+    scroll-padding-top: 80px;
+    /* 全局设置滚动填充，值应大于或等于顶部导航的高度 */
+
+    /* TOC 相关变量 */
+    --toc-width: 300px;
+    --article-width: 900px;
+}
+
+body.dark {
+    --primary: #f4f7ff !important;
+    --secondary: #bcc6db !important;
+    --content: #e6ecff !important;
+    --border: rgba(255, 255, 255, 0.08) !important;
+    --theme: var(--fresh-card-bg) !important;
+    --entry: #283141 !important;
+    --code-bg: rgba(23, 29, 41, 0.85) !important;
+    --code-block-bg: rgba(19, 24, 34, 0.92) !important;
+    background-color: var(--fresh-card-bg);
+    color: var(--content);
+}
+
+/* 美化博客标题 */
+.nav #menu .menu-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.35em;
+}
+
+.nav #menu .menu-label {
+    display: inline-flex;
+    align-items: center;
+}
+
+.buttons .button-inner {
+    display: inline-block;
+}
+
+.buttons .button-inner::first-letter {
+    display: inline-block;
+    margin-right: 0.35em;
+}
+
+.first-entry {
+    position: relative;
+    padding: 2.5rem !important;
+    margin-bottom: 3rem !important;
+    border-radius: var(--fresh-radius-lg) !important;
+    background: linear-gradient(to right bottom, var(--fresh-primary-light), var(--fresh-primary)) !important;
+}
+
+.first-entry .entry-header h1 {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    color: white !important;
+    margin-bottom: 1rem !important;
+}
+
+.first-entry .entry-content {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.1rem !important;
+    line-height: 1.8 !important;
+}
+
+/* 美化文章列表 */
+.post-entry {
+    border-radius: var(--fresh-radius-md) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.post-entry:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.post-entry .entry-header h2 {
+    font-size: 1.4rem !important;
+    transition: color 0.3s ease !important;
+}
+
+.post-entry:hover .entry-header h2 {
+    color: var(--fresh-primary) !important;
+}
+
+/* 美化页脚 */
+.footer {
+    color: var(--fresh-text-secondary) !important;
+    margin-top: 3rem !important;
+    padding: 1.5rem 0 !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 767px) {
+    .first-entry .entry-header h1 {
+        font-size: 2rem !important;
+    }
+
+    .first-entry .entry-content {
+        font-size: 1rem !important;
+    }
+
+    .menu-toggle {
+        display: block;
+        /* 确保按钮在移动端显示 */
+        background: none;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        position: absolute;
+        /* 调整按钮位置，可能需要根据你的 header 布局微调 */
+        right: 15px;
+        top: 15px;
+        z-index: 1001;
+        /* 确保在菜单之上 */
+    }
+
+    .menu-toggle .hamburger {
+        display: block;
+        width: 24px;
+        height: 20px;
+        position: relative;
+    }
+
+    .menu-toggle .hamburger .line {
+        display: block;
+        background-color: var(--content);
+        /* 使用主题颜色 */
+        width: 100%;
+        height: 2px;
+        border-radius: 1px;
+        position: absolute;
+        left: 0;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle .hamburger .line:nth-child(1) {
+        top: 0;
+    }
+
+    .menu-toggle .hamburger .line:nth-child(2) {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .menu-toggle .hamburger .line:nth-child(3) {
+        bottom: 0;
+    }
+
+    /* 激活状态：汉堡包变 X */
+    .menu-toggle.active .hamburger .line:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+    }
+
+    .menu-toggle.active .hamburger .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .hamburger .line:nth-child(3) {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+    }
+
+    /* 移动端菜单样式 - 高度自适应 */
+    #menu {
+        height: auto !important;
+        max-height: calc(100vh - 64px) !important;
+        bottom: auto !important;
+    }
+}
+
+/* 非移动端隐藏切换按钮 */
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    #menu {
+        display: flex !important;
+        /* 确保在桌面端始终显示 */
+        position: static;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        flex-direction: row;
+        /* 恢复水平排列 */
+        width: auto;
+    }
+
+    #menu li {
+        border: none;
+        width: auto;
+        /* 恢复自动宽度 */
+    }
+
+    #menu li a {
+        padding: 0 10px;
+        /* 调整桌面端间距 */
+        font-size: inherit;
+        /* 恢复默认字体大小 */
+    }
+
+    body.menu-opened {
+        overflow: auto;
+        /* 恢复滚动 */
+    }
+}
+
+/* 为标题元素添加滚动边距，确保锚点定位正确 */
+h1[id],
+h2[id],
+h3[id],
+h4[id],
+h5[id],
+h6[id] {
+    scroll-margin-top: 80px;
+    /* 与上面的scroll-padding-top值保持一致 */
+}
+
+/* Table of Contents (TOC) Styles */
+/* ================================= */
+
+/* -- Variables (Keep in original files if needed elsewhere, e.g., blank.css) -- */
+/* :root { --toc-width: 300px; } */ /* Example reference */
+
+/* -- Basic Container -- */
+.toc {
+    margin: 0 2px 40px 2px;
+    border: 1px solid var(--border);
+    background: var(--code-bg); /* Default background from post-single */
+    border-radius: var(--radius);
+    padding: 0.4em;
+}
+
+/* -- Dark Mode -- */
+.dark .toc {
+    background: rgba(36, 39, 46, 0.95);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+}
+
+/* -- Wide Layout Container (from blank.css) -- */
+/* 桌面端始终显示在左侧 */
+@media (min-width: 1280px) {
+    /* 确保 article 是 relative 定位，以便 TOC 可以相对于它定位 */
+    article.post-single {
+        position: relative;
+    }
+
+    .toc-container {
+        position: absolute;
+        height: 100%;
+        border-right: 1px solid var(--border);
+        left: calc((var(--toc-width) + var(--gap)) * -1);
+        top: calc(var(--gap) * 2);
+        width: var(--toc-width);
+    }
+}
+
+/* 保留原有的 wide 类样式作为后备 */
+.toc-container.wide {
+    position: absolute;
+    height: 100%;
+    border-right: 1px solid var(--border);
+    left: calc((var(--toc-width) + var(--gap)) * -1);
+    top: calc(var(--gap) * 2);
+    width: var(--toc-width);
+}
+
+/* -- Wide Layout TOC (from blank.css) -- */
+@media (min-width: 1280px) {
+    .toc-container .toc {
+        position: sticky;
+        top: var(--gap);
+        border: unset;
+        background: unset;
+        border-radius: unset;
+        width: 100%;
+        margin: 0 2px 40px 2px;
+    }
+}
+
+.wide .toc {
+    position: sticky;
+    top: var(--gap);
+    border: unset;
+    background: unset;
+    border-radius: unset;
+    width: 100%;
+    margin: 0 2px 40px 2px;
+}
+
+
+/* -- TOC Title & Folding Control -- */
+.toc details summary {
+    cursor: zoom-in;
+    margin-inline-start: 10px; /* From post-single */
+    user-select: none;
+    /* padding: 12px 0; */ /* From blank.css - choose one margin/padding */
+}
+
+.toc details[open] summary {
+    cursor: zoom-out;
+    font-weight: 500; /* From blank.css */
+}
+
+.toc .details { /* From post-single */
+    display: inline;
+    font-weight: 500;
+}
+
+.toc summary:focus { /* From post-single */
+    outline: 0;
+}
+
+/* -- Inner Container & Scrolling -- */
+.toc .inner {
+    margin: 5px 20px 0; /* From post-single */
+    padding: 0 10px; /* From post-single */
+    opacity: 0.9; /* From post-single */
+    font-size: 16px; /* From blank.css */
+    max-height: 83vh; /* From blank.css - Scroll height */
+    overflow-y: auto; /* From blank.css - Enable scroll */
+}
+
+.toc-container.wide .toc .inner { /* From blank.css */
+    margin: 0;
+     padding: 0px 15px 15px 20px; /* Overrides post-single */
+}
+
+/* -- List Item Styles (Defaults / Mobile) -- */
+.toc ul { /* From blank.css */
+    list-style-type: circle; /* Or none if preferred */
+     padding-inline-start: 20px; /* Adjust as needed */
+}
+
+.toc li { /* From blank.css */
+    list-style: none;
+    font-size: 0.95rem;
+    padding-bottom: 5px;
+     margin-top: 5px; /* From post-single */
+}
+
+
+.toc li ul { /* Nested lists (Defaults / Mobile) */
+    margin-inline-start: var(--gap); /* From post-single */
+    /* margin-inline-start: calc(var(--gap) * 0.5); */ /* Alternative from blank.css */
+    list-style-type: none; /* From blank.css */
+    padding-inline-start: 10px; /* Fine-tune indentation */
+}
+
+/* -- Link Styles (Defaults / Mobile) -- */
+.toc li a {
+    display: inline-block; /* Ensures padding/border work well */
+    /* box-shadow: 0 1px 0 var(--primary); */ /* Optional bottom border */
+    padding-bottom: 1px;
+    transition: color 0.2s ease; /* Added transition */
+}
+
+.toc li a:hover {
+    color: var(--secondary); /* From blank.css */
+    box-shadow: 0 1px 0 var(--secondary); /* Mimic post-content link hover */
+}
+
+/* -- Active Link Style (Defaults / Mobile) -- */
+/* Consider using JS to add/remove this class */
+.toc li a.active {
+    font-size: 110%; /* Or adjust font-weight */
+    font-weight: 600;
+    color: var(--primary); /* Example active color */
+    /* border-bottom: 1px solid; */ /* Alternative style */
+    /* padding-bottom: 2px; */
+}
+
+/* -- Desktop Specific Styles (Hover effects, etc.) -- */
+@media (min-width: 768px) {
+    /* Hide scrollbar on Desktop */
+    /* Use .toc selector for consistency, assuming .toc is inside .toc-container */
+    .toc .inner { /* Changed selector from .toc-container .inner */
+        overflow-y: auto;
+        scrollbar-width: none;        /* Firefox */
+        -ms-overflow-style: none;     /* IE and Edge */
+    }
+
+    .toc .inner::-webkit-scrollbar { /* Changed selector */
+        display: none;                /* Chrome, Safari, Opera */
+    }
+
+    /* General link item style on Desktop */
+     /* Use .toc selector for consistency */
+    .toc .inner ul li a { /* Changed selector */
+        display: block;
+        padding: 6px 12px;
+        margin: 2px 0;
+        border-radius: var(--fresh-radius-sm, 4px); /* Use variable or fallback */
+        transition:
+            transform 0.25s ease-in-out,
+            box-shadow 0.25s ease-in-out,
+            background-color 0.2s ease-in-out;
+        color: #444;
+        will-change: transform, box-shadow;
+        font-weight: normal;
+        /* Override default link styles for desktop */
+        box-shadow: none; /* Remove default bottom border/shadow */
+    }
+
+    .dark .toc .inner ul li a {
+        color: rgba(255, 255, 255, 0.82);
+    }
+
+    /* Hierarchical link styles on Desktop */
+    .toc .inner>ul>li>a { /* Changed selector */
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .toc .inner>ul>li>ul>li>a { /* Changed selector */
+        font-size: 0.9rem;
+    }
+
+    .toc .inner>ul>li>ul>li>ul>li>a { /* Changed selector */
+        font-size: 0.85rem;
+        color: #555;
+    }
+
+    .toc .inner>ul>li>ul>li>ul>li>ul>li>a { /* Changed selector */
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+    /* Link Hover effect on Desktop */
+    .toc .inner ul li a:hover { /* Changed selector */
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.03);
+        background-color: rgba(0, 0, 0, 0.02);
+        color: var(--primary); /* Ensure --primary is defined */
+    }
+
+    .dark .toc .inner ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+        color: rgba(255, 255, 255, 0.95);
+    }
+
+    /* Active link style on Desktop */
+    .toc .inner ul li a.active { /* Changed selector */
+        color: #000;
+        font-weight: 500; /* Override default active style */
+        background-color: rgba(0, 0, 0, 0.03);
+        /* Override default active style */
+        font-size: inherit; /* Reset font-size boost from default active */
+    }
+
+    .dark .toc .inner ul li a.active {
+        color: #fff;
+        background-color: rgba(52, 152, 219, 0.22);
+        box-shadow: 0 0 0 1px rgba(52, 152, 219, 0.35);
+    }
+
+    /* Nested list style on Desktop */
+    .toc .inner ul ul { /* Changed selector */
+        margin-left: 12px;
+        padding-left: 6px;
+        border-left: 1px solid rgba(0, 0, 0, 0.08);
+        margin-top: 4px;
+        margin-bottom: 4px;
+        /* Override default nested list styles */
+        list-style-type: none; /* Ensure no list style */
+    }
+
+    .dark .toc .inner ul ul {
+        border-left-color: rgba(255, 255, 255, 0.12);
+    }
+}
+
+
+/* -- Mobile Specific Styles (from theme-modern.css consolidation) -- */
+@media (max-width: 767px) {
+    /* Hide TOC by default on mobile */
+    .toc {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 60%; /* 减小宽度：从 80% 改为 60% */
+        max-width: 250px; /* 减小最大宽度：从 300px 改为 250px */
+        height: 100%;
+        background: rgba(255, 255, 255, 0.35); /* 35% 不透明度（65% 透明） */
+        backdrop-filter: blur(10px); /* 添加毛玻璃效果 */
+        -webkit-backdrop-filter: blur(10px); /* Safari 支持 */
+        border: none;
+        border-right: 1px solid var(--border);
+        border-radius: 0;
+        padding: var(--gap);
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050; /* ADDED: Ensure TOC is above the overlay */
+        overflow-y: auto;
+        /* 隐藏滚动条但保持滚动功能 */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+        margin: 0; /* Reset margin */
+    }
+
+    /* 隐藏 WebKit 浏览器（Chrome/Safari）的滚动条 */
+    .toc::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Show TOC when .show class is added */
+    .toc.show {
+        transform: translateX(0);
+    }
+
+    /* 暗色主题的 TOC 透明背景 */
+    .dark .toc {
+        background: rgba(28, 30, 36, 0.35); /* 暗色背景 35% 不透明度（65% 透明） */
+    }
+
+    /* Toggle Button (Assuming .toc-toggle exists) */
+    .toc-toggle {
+        /* Add styles for your toggle button here */
+        /* e.g., position, size, background, z-index */
+        display: block; /* Or flex, etc. */
+        position: fixed; /* Or absolute within header */
+        bottom: 2rem; /* ADDED: Position bottom */
+        right: 2rem; /* ADDED: Position right */
+        z-index: var(--modern-z-header); /* Ensure z-index variable exists or replace - Keep high for button visibility */
+        /* ... other styles ... */
+         cursor: pointer;
+        /* Add some basic styling for visibility if none exists */
+        background: var(--theme, white);
+        border: 1px solid var(--border);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        /* Add icon or text here */
+    }
+
+    /* Prevent body scroll when TOC is open */
+    body.toc-open {
+        overflow: hidden;
+    }
+
+     /* Adjust inner padding/margin for mobile */
+     .toc .inner {
+         margin: 10px 0 0 0; /* Adjust as needed */
+         padding: 0 5px 15px 5px; /* Adjust as needed */
+         max-height: none; /* Remove max-height if using full screen */
+     }
+
+     .toc details summary {
+         margin-inline-start: 5px; /* Adjust margin */
+     }
+}
+
+.heatmap-section {
+    min-height: 263px;
+}

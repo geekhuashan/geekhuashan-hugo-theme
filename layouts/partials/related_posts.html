@@ -1,0 +1,107 @@
+{{- if .Site.Params.relatedPosts.enable }}
+{{- $related := .Site.RegularPages.Related . | first (.Site.Params.relatedPosts.count | default 3) }}
+
+{{- if $related }}
+<div class="related-posts">
+  <h3 class="related-posts-title">
+    {{- .Site.Params.relatedPosts.title | default "相关推荐" -}}
+  </h3>
+
+  <div class="related-posts-grid">
+    {{- range $related }}
+    <article class="related-post-card">
+      {{- if $.Site.Params.relatedPosts.showCover }}
+      <a href="{{ .Permalink }}" class="related-post-image" aria-label="{{ .Title }}">
+        {{- $image := "" }}
+        {{- /* 优先级1: 检查 Front Matter 中的 cover */ -}}
+        {{- if reflect.IsMap .Params.cover }}
+          {{- $image = .Params.cover.image }}
+        {{- else if .Params.cover }}
+          {{- $image = .Params.cover }}
+        {{- end }}
+
+        {{- /* 优先级2: 如果没有cover，尝试从文章内容提取第一张图片 */ -}}
+        {{- if not $image }}
+          {{- $content := .Content }}
+          {{- $imgRegex := `<img[^>]+src=["']([^"']+)["']` }}
+          {{- $matches := findRE $imgRegex $content 1 }}
+          {{- if $matches }}
+            {{- $match := index $matches 0 }}
+            {{- $srcRegex := `src=["']([^"']+)["']` }}
+            {{- $srcMatches := findRE $srcRegex $match 1 }}
+            {{- if $srcMatches }}
+              {{- $src := index $srcMatches 0 }}
+              {{- $image = replaceRE `src=["']([^"']+)["']` "$1" $src }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+
+        {{- /* 显示图片或占位符 */ -}}
+        {{- if $image }}
+        <img src="{{ $image }}" alt="{{ .Title }}" loading="lazy">
+        {{- else }}
+        <div class="related-post-image-placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+        </div>
+        {{- end }}
+      </a>
+      {{- end }}
+
+      <div class="related-post-content">
+        <h4 class="related-post-title">
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h4>
+
+        {{- if and $.Site.Params.relatedPosts.showExcerpt .Summary }}
+        <p class="related-post-excerpt">
+          {{ .Summary | plainify | htmlUnescape | truncate 100 }}
+        </p>
+        {{- end }}
+
+        <div class="related-post-meta">
+          {{- if and $.Site.Params.relatedPosts.showDate .Date }}
+          <span class="related-post-date">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            {{ .Date.Format (.Site.Params.DateFormat | default "2006-01-02") }}
+          </span>
+          {{- end }}
+
+          {{- if and $.Site.Params.relatedPosts.showTags .Params.tags }}
+          <div class="related-post-tags">
+            {{- range first 3 .Params.tags }}
+            <span class="related-post-tag">#{{ . }}</span>
+            {{- end }}
+          </div>
+          {{- end }}
+        </div>
+      </div>
+
+      <a href="{{ .Permalink }}" class="related-post-link" aria-label="阅读 {{ .Title }}"></a>
+    </article>
+    {{- end }}
+  </div>
+</div>
+
+{{- else }}
+{{- /* 没有相关文章时,显示提示信息 */ -}}
+<div class="related-posts related-posts-empty">
+  <h3 class="related-posts-title">
+    {{- .Site.Params.relatedPosts.title | default "相关推荐" -}}
+  </h3>
+  <p class="related-posts-empty-message">
+    暂无相关文章。
+    <a href="/archives/">{{ .Site.Params.relatedPosts.emptyMessage | default "探索更多文章" }}</a>
+  </p>
+</div>
+{{- end }}
+
+{{- end }}

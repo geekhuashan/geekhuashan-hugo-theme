@@ -1,0 +1,9 @@
+<!-- 
+  警告框短代码
+  用法: fresh-alert 类型
+  类型: info, success, warning, danger (默认info)
+-->
+{{- $type := .Get 0 | default "info" -}}
+<div class="fresh-alert fresh-alert-{{ $type }}">
+    {{ .Inner | markdownify }}
+</div>

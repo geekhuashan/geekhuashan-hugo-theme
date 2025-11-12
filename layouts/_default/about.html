@@ -1,0 +1,1681 @@
+{{- define "main" }}
+<!-- 引入现代化交互库 -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.dots.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- 主内容区域 -->
+<article class="about-page">
+    <!-- 3D背景效果容器 -->
+    <div id="vanta-bg"></div>
+
+    <!-- 顶部介绍区 -->
+    <div class="hero-section">
+        <div class="hero-image hero-image-center">
+            <div class="image-wrapper image-wrapper-large" data-tilt data-tilt-max="20" data-tilt-speed="400"
+                data-tilt-glare data-tilt-max-glare="0.4">
+                <a href="{{ "resume-2025.html" | relURL }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" class="profile-image profile-image-large"
+                        loading="lazy">
+                </a>
+                <div class="image-backdrop"></div>
+            </div>
+        </div>
+        <div class="hero-typewriter">
+            <span id="typed-main"></span><span class="cursor">|</span>
+        </div>
+    </div>
+
+    <!-- 个人简介部分 -->
+    <section class="profile-section" data-aos="fade-up">
+        <div class="section-header">
+            <h2 class="section-title">个人简介</h2>
+            <div class="animated-bar"></div>
+        </div>
+        <div class="profile-content">
+            <p class="profile-text" data-aos="fade-up" data-aos-delay="100">
+                <span class="highlight">90后</span>，上海211大学，应用化学专业硕士毕业。目前在一家跨国化工公司的研发部门，负责高通量配方实验室工作。💻🧱
+            </p>
+            <p class="profile-text" data-aos="fade-up" data-aos-delay="200">
+                本网站是想通过自身的所学所思，将自己已有知识资源集成一体，输出反逼输入，有值得借鉴的地方也提供给大家参考。 😛🏝️
+            </p>
+            <div class="profile-stats" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item">
+                    <div class="stat-number counter" data-target="8">0</div>
+                    <div class="stat-label">工作年限</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number counter" data-target="20">0</div>
+                    <div class="stat-label">项目经验</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number counter" data-target="3000">0</div>
+                    <div class="stat-label">配方优化</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number counter" data-target="7">0</div>
+                    <div class="stat-label">业务部门合作</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 建站原因部分 -->
+    <section class="reasons-section" data-aos="fade-up">
+        <div class="section-header">
+            <h2 class="section-title">为什么构建此网站</h2>
+            <div class="animated-bar"></div>
+        </div>
+
+        <div class="reasons-grid">
+            <div class="reason-card" data-aos="flip-left" data-aos-delay="100" data-tilt data-tilt-max="10">
+                <div class="reason-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                        <path d="M14.5 9.5 16 8l2 2-1.5 1.5"></path>
+                        <path d="m9.5 14.5-1.5 1.5-2-2L7.5 12.5"></path>
+                        <path d="M17.5 6.5 19 5l2 2-1.5 1.5"></path>
+                        <path d="m6.5 17.5-1.5 1.5-2-2L4.5 15.5"></path>
+                        <path d="M3 12h2"></path>
+                        <path d="M19 12h2"></path>
+                        <path d="M12 3v2"></path>
+                        <path d="M12 19v2"></path>
+                    </svg>
+                </div>
+                <h3 class="reason-title">动手实践</h3>
+                <p class="reason-description">通过建站学习git的操作，了解基本的网站信息如CSS、HTML等，并将这些技术应用到实践中。</p>
+                <div class="card-overlay"></div>
+            </div>
+
+            <div class="reason-card" data-aos="flip-right" data-aos-delay="200" data-tilt data-tilt-max="10">
+                <div class="reason-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                </div>
+                <h3 class="reason-title">梳理自己的知识</h3>
+                <p class="reason-description">从小学开始到现在工作期间，心里时常会出现对某些知识点似懂非懂的感觉，知识一直在学，也一直在遗忘，找不到好的管理方法。</p>
+                <p class="reason-description">有时候需要准备一个公开的报告，倒逼自己去梳理，反而效果不错，故希望自己能在一个公开的网络上分享自己的见解。</p>
+                <div class="card-overlay"></div>
+            </div>
+
+            <div class="reason-card" data-aos="flip-left" data-aos-delay="300" data-tilt data-tilt-max="10">
+                <div class="reason-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v8"></path>
+                        <path d="m4.93 10.93 1.41 1.41"></path>
+                        <path d="M2 18h2"></path>
+                        <path d="M20 18h2"></path>
+                        <path d="m19.07 10.93-1.41 1.41"></path>
+                        <path d="M22 22H2"></path>
+                        <path d="m8 22 4-10 4 10"></path>
+                        <path d="M12 22v-3"></path>
+                    </svg>
+                </div>
+                <h3 class="reason-title">Show your work</h3>
+                <p class="reason-description">看过这本书《show your work》，其中提到在这个网络的时代，如果自己的工作不能在网上找到，不能被他人发现，就跟没做也没有区别。</p>
+                <div class="card-overlay"></div>
+            </div>
+
+            <div class="reason-card" data-aos="flip-right" data-aos-delay="400" data-tilt data-tilt-max="10">
+                <div class="reason-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                    </svg>
+                </div>
+                <h3 class="reason-title">个人日记</h3>
+                <p class="reason-description">记录生活点点滴滴，找到一个不那么刻意的地方去记录生活的点点滴滴，找到一个情绪的出口。</p>
+                <div class="card-overlay"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育背景部分 -->
+    <!-- 已移除教育背景区块 -->
+
+    <div class="about-content">
+        <!-- 已移除兴趣爱好区块 -->
+        <h2 class="section-title" data-aos="fade-up">个人特质</h2>
+        <div class="tag-container-vertical"
+            style="margin-bottom:2.5rem;grid-template-columns:repeat(3,1fr);display:grid;gap:10px;">
+            <span class="tag large purple" style="grid-column:span 2;">💻 数据驱动</span>
+            <span class="tag blue">⚙️ 自动化爱好者</span>
+            <span class="tag orange">🧪 化学创新</span>
+            <span class="tag green">🔬 高通量研究</span>
+            <span class="tag large teal" style="grid-column:span 2;">🤖 AI应用探索者</span>
+            <span class="tag red">📊 数据可视化</span>
+            <span class="tag large blue">🌐 跨职能协作</span>
+            <span class="tag green">🚀 效率提升</span>
+            <span class="tag orange">🔥 团队协作</span>
+        </div>
+    </div>
+
+    {{- if .Params.socialLinks }}
+    <div class="about-social" data-aos="zoom-in">
+        <h3>{{ .Params.socialHeading | default "联系我" }}</h3>
+        <div class="social-links">
+            {{- range .Params.socialLinks }}
+            <a href="{{ .url }}" class="social-link" target="_blank" rel="noopener noreferrer" data-tilt
+                data-tilt-scale="1.1">
+                {{- if .icon }}
+                <span class="social-icon">{{ .icon | safeHTML }}</span>
+                {{- end }}
+                <span class="social-name">{{ .name }}</span>
+            </a>
+            {{- end }}
+        </div>
+    </div>
+    {{- end }}
+
+    {{- if .Params.skills }}
+    <div class="about-skills" data-aos="fade-up">
+        <h3>{{ .Params.skillsHeading | default "技能" }}</h3>
+        <div class="skills-grid">
+            {{- range $index, $skill := .Params.skills }}
+            <div class="skill-item" style="--skill-order: {{ $index }}" data-tilt>
+                <div class="skill-name">
+                    {{ .name }}
+                    <span class="skill-percentage">{{ .level }}%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress skill-level-{{ .level }}" data-percentage="{{ .level }}"></div>
+                </div>
+            </div>
+            {{- end }}
+        </div>
+    </div>
+    {{- end }}
+
+    {{- if .Params.timeline }}
+    <div class="about-timeline" data-aos="fade-up">
+        <h3>{{ .Params.timelineHeading | default "经历" }}</h3>
+        <div class="timeline">
+            {{- range $index, $item := .Params.timeline }}
+            <div class="timeline-item" style="--timeline-order: {{ $index }}" data-aos="fade-left"
+                data-aos-delay="{{ mul $index 100 }}">
+                <div class="timeline-date">{{ .date }}</div>
+                <div class="timeline-content" data-tilt>
+                    <h4>{{ .title }}</h4>
+                    <p>{{ .description }}</p>
+                </div>
+            </div>
+            {{- end }}
+        </div>
+    </div>
+    {{- end }}
+
+    <!-- 技能部分 -->
+    <section class="skills-section" data-aos="fade-up">
+        <div class="section-header">
+            <h2 class="section-title">技能专长</h2>
+            <div class="animated-bar"></div>
+        </div>
+
+        <div class="skills-container">
+            <div class="skill-group" data-aos="fade-right" data-aos-delay="100">
+                <div class="skill-item" data-tilt>
+                    <div class="skill-info">
+                        <h3 class="skill-name">数据分析</h3>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress skill-level-90" data-percentage="90"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item" data-tilt>
+                    <div class="skill-info">
+                        <h3 class="skill-name">高通量配方实验</h3>
+                        <span class="skill-percentage">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress skill-level-95" data-percentage="95"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item" data-tilt>
+                    <div class="skill-info">
+                        <h3 class="skill-name">自动化系统设计</h3>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress skill-level-85" data-percentage="85"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-group" data-aos="fade-left" data-aos-delay="100">
+                <div class="skill-item" data-tilt>
+                    <div class="skill-info">
+                        <h3 class="skill-name">研发项目管理</h3>
+                        <span class="skill-percentage">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress skill-level-80" data-percentage="80"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item" data-tilt>
+                    <div class="skill-info">
+                        <h3 class="skill-name">数据可视化</h3>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress skill-level-85" data-percentage="85"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item" data-tilt>
+                    <div class="skill-info">
+                        <h3 class="skill-name">化学配方优化</h3>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress skill-level-90" data-percentage="90"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 未来规划部分 -->
+    <section class="future-section" data-aos="fade-up">
+        <div class="section-header">
+            <h2 class="section-title">未来规划</h2>
+            <div class="animated-bar"></div>
+        </div>
+
+        <div class="future-container">
+            <div class="future-card" data-aos="zoom-in-right" data-aos-delay="100" data-tilt>
+                <div class="future-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <h3 class="future-title">近期目标</h3>
+                <div class="future-description">
+                    <span id="typing-short-goal"></span><span class="typing-cursor">|</span>
+                </div>
+            </div>
+
+            <div class="future-card" data-aos="zoom-in-left" data-aos-delay="200" data-tilt>
+                <div class="future-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20v-6M9 17l3-3 3 3"></path>
+                        <path
+                            d="M5 6a5 5 0 0 1 7-4.47A5 5 0 0 1 19 6c0 2.17-1.75 3.92-3.92 3.95-1.94.03-3.59-1.37-3.99-3.21a3.6 3.6 0 0 1-.09-.74">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="future-title">长期目标</h3>
+                <div class="future-description">
+                    <span id="typing-long-goal"></span><span class="typing-cursor">|</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式部分 -->
+    <section class="contact-section" data-aos="fade-up">
+        <div class="section-header">
+            <h2 class="section-title">找到我</h2>
+            <div class="animated-bar"></div>
+        </div>
+
+        <div class="contact-container">
+            <a href="https://github.com/geekhuashan" class="contact-item" data-aos="flip-up" data-aos-delay="100"
+                data-tilt data-tilt-scale="1.1">
+                <div class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </div>
+                <div class="contact-text">GitHub</div>
+                <div class="contact-ripple"></div>
+            </a>
+
+            <a href="mailto:geekhuashan@gmail.com" class="contact-item" data-aos="flip-up" data-aos-delay="200"
+                data-tilt data-tilt-scale="1.1">
+                <div class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </div>
+                <div class="contact-text">Email</div>
+                <div class="contact-ripple"></div>
+            </a>
+
+            <a href="tel:135-2436-8646" class="contact-item" data-aos="flip-up" data-aos-delay="300" data-tilt
+                data-tilt-scale="1.1">
+                <div class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="contact-text">电话</div>
+                <div class="contact-ripple"></div>
+            </a>
+        </div>
+    </section>
+</article>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 3D背景效果初始化
+        VANTA.DOTS({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3e6def,
+            color2: 0xa777e3,
+            backgroundColor: 0xffffff,
+            size: 3.50,
+            spacing: 30.00,
+            showLines: false
+        });
+
+        // 初始化AOS动画
+        AOS.init({
+            duration: 800,
+            once: false,
+            mirror: true
+        });
+
+        try {
+            // 自定义打字机效果
+            function createTypewriter(element, strings, options = {}) {
+                const el = document.querySelector(element);
+                if (!el) return;
+
+                const defaults = {
+                    typeSpeed: 50,
+                    backSpeed: 30,
+                    backDelay: 2000,
+                    startDelay: 1000,
+                    loop: true,
+                };
+
+                const config = { ...defaults, ...options };
+                let currentStringIndex = 0;
+                let currentCharIndex = 0;
+                let isDeleting = false;
+                let timeout;
+
+                function type() {
+                    const currentString = strings[currentStringIndex];
+
+                    if (isDeleting) {
+                        // 删除字符
+                        el.textContent = currentString.substring(0, currentCharIndex - 1);
+                        currentCharIndex--;
+
+                        if (currentCharIndex === 0) {
+                            isDeleting = false;
+                            currentStringIndex = (currentStringIndex + 1) % strings.length;
+                            setTimeout(type, config.backDelay);
+                        } else {
+                            setTimeout(type, config.backSpeed);
+                        }
+                    } else {
+                        // 添加字符
+                        el.textContent = currentString.substring(0, currentCharIndex + 1);
+                        currentCharIndex++;
+
+                        if (currentCharIndex === currentString.length) {
+                            isDeleting = true;
+                            setTimeout(type, config.backDelay);
+                        } else {
+                            setTimeout(type, config.typeSpeed);
+                        }
+                    }
+                }
+
+                // 启动打字效果
+                setTimeout(() => {
+                    type();
+                }, config.startDelay);
+            }
+
+            // 合并打字机内容
+            createTypewriter('#typed-main', [
+                '数据分析学习之路的行者',
+                '高通量实验室工程师',
+                '💻 数据驱动',
+                '⚙️ 自动化爱好者',
+                '🧪 化学创新',
+                '🤖 AI应用探索者'
+            ], {
+                typeSpeed: 30,
+                backSpeed: 15,
+                backDelay: 1000,
+                startDelay: 800
+            });
+
+            // 近期目标打字机效果
+            createTypewriter('#typing-short-goal', [
+                '不断更新博客，不断学习，不断输出。',
+                '深入学习数据分析和可视化技术。',
+                '完善个人知识管理系统。'
+            ], {
+                typeSpeed: 40,
+                backSpeed: 20,
+                backDelay: 2000,
+                startDelay: 1000
+            });
+
+            // 长期目标打字机效果
+            createTypewriter('#typing-long-goal', [
+                '希望能提供自己的价值，并利用自己的能力找到一个所谓的睡后收入。',
+                '建立个人品牌，成为行业内的技术专家。',
+                '结合化学与数据分析，开发创新解决方案。'
+            ], {
+                typeSpeed: 40,
+                backSpeed: 20,
+                backDelay: 2000,
+                startDelay: 1500
+            });
+        } catch (e) {
+            console.error("Typewriter error:", e);
+        }
+
+        // 光标闪烁效果
+        setInterval(function () {
+            document.querySelectorAll('.cursor, .typing-cursor').forEach(cursor => {
+                cursor.classList.toggle('blink');
+            });
+        }, 500);
+
+        // 计数器效果
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // 持续时间（毫秒）
+            let startTime = null;
+
+            function animateCounter(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+                const percentage = Math.min(progress / duration, 1);
+
+                // 使用缓动函数使动画更加自然
+                const easeOutQuart = 1 - Math.pow(1 - percentage, 4);
+
+                const currentValue = Math.floor(target * easeOutQuart);
+                counter.textContent = currentValue;
+
+                if (percentage < 1) {
+                    requestAnimationFrame(animateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            }
+
+            // 当元素进入视口时开始动画
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        requestAnimationFrame(animateCounter);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(counter.parentNode);
+        });
+
+        try {
+            // 初始化3D倾斜效果
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.3,
+            });
+        } catch (e) {
+            console.error("VanillaTilt error:", e);
+        }
+
+        try {
+            // 初始化兴趣轮播
+            const interestsSwiper = new Swiper('.interests-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                centeredSlides: true,
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                }
+            });
+        } catch (e) {
+            console.error("Swiper error:", e);
+        }
+
+        // 联系方式波纹效果
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('mouseenter', function (e) {
+                const ripple = this.querySelector('.contact-ripple');
+                ripple.style.left = `${e.offsetX}px`;
+                ripple.style.top = `${e.offsetY}px`;
+                ripple.classList.add('active');
+
+                setTimeout(() => {
+                    ripple.classList.remove('active');
+                }, 800);
+            });
+        });
+
+        try {
+            // 滚动触发器动画
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 这里不再需要 GSAP 动画，因为我们已经使用内联样式设置了宽度
+        } catch (e) {
+            console.error("GSAP error:", e);
+        }
+    });
+</script>
+
+<style>
+    /* 全局样式 */
+    .about-page {
+        width: 100%;
+        max-width: none;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* 3D背景效果 */
+    #vanta-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.5;
+    }
+
+    /* 区块标题通用样式 */
+    .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #333;
+        position: relative;
+        display: inline-block;
+    }
+
+    .animated-bar {
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #6e8efb, #a777e3);
+        margin: 0 auto;
+        border-radius: 2px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .animated-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+        to {
+            left: 100%;
+        }
+    }
+
+    /* 渐变文字 */
+    .gradient-text {
+        background: linear-gradient(90deg, #6e8efb, #a777e3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    /* 闪烁光标 */
+    .cursor,
+    .typing-cursor {
+        opacity: 1;
+        animation: blink 1s infinite;
+        font-weight: 100;
+    }
+
+    .cursor.blink,
+    .typing-cursor.blink {
+        opacity: 0;
+    }
+
+    @keyframes blink {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+    }
+
+    /* 高亮文本 */
+    .highlight {
+        position: relative;
+        display: inline-block;
+        color: #6e8efb;
+        font-weight: 600;
+    }
+
+    .highlight::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background-color: rgba(110, 142, 251, 0.2);
+        z-index: -1;
+        border-radius: 3px;
+    }
+
+    /* 英雄区域样式 */
+    .hero-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 80px 0 40px 0;
+        gap: 0;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .hero-image.hero-image-center {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .image-wrapper.image-wrapper-large {
+        width: 450px;
+        height: 450px;
+        max-width: 90vw;
+        max-height: 90vw;
+    }
+
+    .profile-image.profile-image-large {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        transition: transform 0.5s ease;
+    }
+
+    .image-backdrop {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: 20px;
+        background-color: rgba(0, 0, 0, 0.1);
+        filter: blur(10px);
+        border-radius: 50%;
+    }
+
+    .hero-typewriter {
+        margin-top: 64px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60px;
+    }
+
+    #typed-main {
+        font-size: 2.3rem;
+        font-weight: 800;
+        color: #6e8efb;
+        letter-spacing: 1px;
+        border-radius: 12px;
+        padding: 0 18px;
+        line-height: 1.3;
+        transition: color 0.5s;
+    }
+
+    .hero-typewriter .cursor {
+        font-size: 2.3rem;
+        font-weight: 400;
+        color: #a777e3;
+        margin-left: 2px;
+        animation: blink 1s infinite;
+    }
+
+    @media (max-width: 768px) {
+
+        #typed-main,
+        .hero-typewriter .cursor {
+            font-size: 1.3rem;
+        }
+
+        .hero-typewriter {
+            min-height: 40px;
+        }
+    }
+
+    /* 个人简介区域 */
+    .profile-section {
+        padding: 60px 0;
+    }
+
+    .profile-content {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .profile-text {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: #444;
+    }
+
+    .profile-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .stat-item {
+        text-align: center;
+        flex: 1;
+        min-width: 120px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #6e8efb, #a777e3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        margin-bottom: 10px;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    /* 建站原因区 */
+    .reasons-section {
+        padding: 60px 0;
+    }
+
+    .reasons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .reason-card {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .reason-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .reason-icon {
+        color: #6e8efb;
+        margin-bottom: 20px;
+    }
+
+    .reason-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .reason-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .card-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #6e8efb, #a777e3);
+        z-index: -1;
+        transition: height 0.3s ease;
+    }
+
+    .reason-card:hover .card-overlay {
+        height: 100%;
+        opacity: 0.05;
+    }
+
+    /* 教育背景 */
+    .education-section {
+        padding: 60px 0;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 3px;
+        background: linear-gradient(180deg, #6e8efb, #a777e3);
+        transform: translateX(-50%);
+    }
+
+    .timeline-item {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 30px;
+        margin-bottom: 50px;
+        width: 50%;
+    }
+
+    .timeline-item:nth-child(even) {
+        align-self: flex-end;
+        justify-content: flex-start;
+        padding-left: 30px;
+        padding-right: 0;
+        margin-left: 50%;
+    }
+
+    .timeline-marker {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #6e8efb, #a777e3);
+        top: 10px;
+        right: -8px;
+        box-shadow: 0 0 0 4px rgba(110, 142, 251, 0.2);
+    }
+
+    .timeline-item:nth-child(even) .timeline-marker {
+        right: auto;
+        left: -8px;
+    }
+
+    .timeline-content {
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-date {
+        color: #6e8efb;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .timeline-title {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .timeline-school {
+        display: flex;
+        align-items: center;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .timeline-school svg {
+        margin-right: 10px;
+        color: #a777e3;
+    }
+
+    /* 兴趣爱好 */
+    .interests-section {
+        padding: 60px 0;
+    }
+
+    .interests-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .interests-swiper {
+        width: 100%;
+        padding: 30px 10px;
+    }
+
+    .interest-card {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .interest-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .interest-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    .interest-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .interest-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #666;
+    }
+
+    /* 个人特质 */
+    .traits-section {
+        padding: 60px 0;
+    }
+
+    .traits-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .traits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
+    }
+
+    .trait-item {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .trait-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        background-color: rgba(110, 142, 251, 0.05);
+    }
+
+    .trait-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .trait-name {
+        font-size: 1rem;
+        color: #333;
+        font-weight: 500;
+    }
+
+    /* 职业经历 */
+    .career-section {
+        padding: 60px 0;
+    }
+
+    .career-timeline {
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-left: 30px;
+    }
+
+    .career-timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 3px;
+        background: linear-gradient(180deg, #6e8efb, #a777e3);
+    }
+
+    .career-item {
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+    .career-dot {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(90deg, #6e8efb, #a777e3);
+        border-radius: 50%;
+        left: -40px;
+        top: 0;
+        box-shadow: 0 0 0 5px rgba(110, 142, 251, 0.2);
+    }
+
+    .career-content {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .career-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .career-date {
+        color: #6e8efb;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .career-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .career-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .career-achievements {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .achievement {
+        background-color: rgba(110, 142, 251, 0.05);
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .achievement-number {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #6e8efb;
+    }
+
+    .achievement-text {
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+    /* 技能区域 */
+    .skills-section {
+        padding: 60px 0;
+    }
+
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .skill-group {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .skill-item {
+        margin-bottom: 25px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .skill-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .skill-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .skill-percentage {
+        color: #6e8efb;
+        font-weight: 600;
+    }
+
+    .skill-bar {
+        height: 8px;
+        background-color: rgba(110, 142, 251, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .skill-progress {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #6e8efb, #a777e3);
+        border-radius: 4px;
+        transition: width 1.5s ease-in-out;
+    }
+
+    /* 直接强制设置技能条颜色和过渡效果 */
+    .skill-progress {
+        background: linear-gradient(90deg, #6e8efb, #a777e3) !important;
+        transition: width 1.5s ease-in-out !important;
+    }
+
+    /* 为每个技能等级动态生成类 */
+    .skill-level-1 {
+        width: 1%;
+    }
+
+    .skill-level-2 {
+        width: 2%;
+    }
+
+    .skill-level-3 {
+        width: 3%;
+    }
+
+    .skill-level-4 {
+        width: 4%;
+    }
+
+    .skill-level-5 {
+        width: 5%;
+    }
+
+    .skill-level-10 {
+        width: 10%;
+    }
+
+    .skill-level-15 {
+        width: 15%;
+    }
+
+    .skill-level-20 {
+        width: 20%;
+    }
+
+    .skill-level-25 {
+        width: 25%;
+    }
+
+    .skill-level-30 {
+        width: 30%;
+    }
+
+    .skill-level-35 {
+        width: 35%;
+    }
+
+    .skill-level-40 {
+        width: 40%;
+    }
+
+    .skill-level-45 {
+        width: 45%;
+    }
+
+    .skill-level-50 {
+        width: 50%;
+    }
+
+    .skill-level-55 {
+        width: 55%;
+    }
+
+    .skill-level-60 {
+        width: 60%;
+    }
+
+    .skill-level-65 {
+        width: 65%;
+    }
+
+    .skill-level-70 {
+        width: 70%;
+    }
+
+    .skill-level-75 {
+        width: 75%;
+    }
+
+    .skill-level-80 {
+        width: 80%;
+    }
+
+    .skill-level-85 {
+        width: 85%;
+    }
+
+    .skill-level-90 {
+        width: 90%;
+    }
+
+    .skill-level-95 {
+        width: 95%;
+    }
+
+    .skill-level-100 {
+        width: 100%;
+    }
+
+    /* 未来规划区域 */
+    .future-section {
+        padding: 60px 0;
+    }
+
+    .future-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .future-card {
+        flex: 1;
+        min-width: 300px;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .future-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .future-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #6e8efb, #a777e3);
+    }
+
+    .future-icon {
+        color: #6e8efb;
+        margin-bottom: 20px;
+    }
+
+    .future-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .future-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #666;
+        min-height: 80px;
+    }
+
+    /* 联系方式区域 */
+    .contact-section {
+        padding: 60px 0;
+    }
+
+    .contact-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .contact-item {
+        background-color: #fff;
+        padding: 25px 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #333;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-icon {
+        margin-bottom: 15px;
+        color: #6e8efb;
+    }
+
+    .contact-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .contact-ripple {
+        position: absolute;
+        background: radial-gradient(circle, rgba(110, 142, 251, 0.3) 0%, rgba(110, 142, 251, 0) 70%);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        transform: scale(0);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .contact-ripple.active {
+        animation: rippleEffect 0.8s ease;
+    }
+
+    @keyframes rippleEffect {
+        0% {
+            transform: scale(0);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(20);
+            opacity: 0;
+        }
+    }
+
+    /* 响应式布局调整 */
+    @media (max-width: 992px) {
+        .hero-section {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .hero-typewriter {
+            justify-content: center;
+        }
+
+        .timeline::before {
+            left: 20px;
+        }
+
+        .timeline-item {
+            width: 100%;
+            padding-left: 50px;
+            padding-right: 0;
+            justify-content: flex-start;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 0;
+            padding-left: 50px;
+        }
+
+        .timeline-marker {
+            left: 12px;
+            right: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: 12px;
+        }
+
+        .reasons-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .traits-grid {
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .hero-typewriter {
+            min-height: 40px;
+        }
+
+        .profile-stats {
+            justify-content: center;
+        }
+
+        .stat-item {
+            min-width: 100px;
+        }
+
+        .skills-container {
+            flex-direction: column;
+        }
+
+        .career-timeline {
+            padding-left: 25px;
+        }
+
+        .career-dot {
+            left: -36px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .about-page {
+            width: 95%;
+        }
+    }
+
+    /* 暗色模式适配 */
+    .dark #vanta-bg {
+        opacity: 0.3;
+    }
+
+    .dark .section-title {
+        color: #eee;
+    }
+
+    .dark .highlight {
+        color: #8ea6fb;
+    }
+
+    .dark .profile-text,
+    .dark .reason-description,
+    .dark .timeline-description,
+    .dark .interest-description,
+    .dark .career-description,
+    .dark .future-description {
+        color: #bbb;
+    }
+
+    .dark .stat-item,
+    .dark .reason-card,
+    .dark .timeline-content,
+    .dark .interest-card,
+    .dark .trait-item,
+    .dark .career-content,
+    .dark .skill-item,
+    .dark .future-card,
+    .dark .contact-item {
+        background-color: #222;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark .reason-title,
+    .dark .timeline-title,
+    .dark .interest-title,
+    .dark .trait-name,
+    .dark .career-title,
+    .dark .skill-name,
+    .dark .future-title,
+    .dark .contact-text {
+        color: #ddd;
+    }
+
+    .dark .stat-label,
+    .dark .timeline-school,
+    .dark .achievement-text {
+        color: #999;
+    }
+
+    .dark .skill-bar {
+        background-color: rgba(110, 142, 251, 0.2);
+    }
+
+    .dark .trait-item:hover {
+        background-color: rgba(110, 142, 251, 0.15);
+    }
+
+    .about-content {
+        line-height: 1.8;
+        margin-bottom: 3rem;
+        position: relative;
+        opacity: 0;
+        animation: contentFadeIn 1s ease-out 0.8s forwards;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+{{- end }}
