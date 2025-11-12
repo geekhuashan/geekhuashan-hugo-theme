@@ -55,7 +55,7 @@
 
 {{- /* Content Security Policy for XSS protection */ -}}
 {{- if hugo.IsProduction | or (eq site.Params.env "production") }}
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://static.cloudflareinsights.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; media-src 'self' https://pub-35ce8e500b78423ab0df79753107bc77.r2.dev https://player.bilibili.com https://www.youtube-nocookie.com https://player.vimeo.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://ep1.adtrafficquality.google https://geekhuashan-pageviews.geekhuashan.workers.dev; frame-src https://fundingchoicesmessages.google.com https://www.google.com https://googleads.g.doubleclick.net https://player.bilibili.com https://www.youtube-nocookie.com https://player.vimeo.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://static.cloudflareinsights.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:; media-src 'self' https://pub-35ce8e500b78423ab0df79753107bc77.r2.dev https://player.bilibili.com https://www.youtube-nocookie.com https://player.vimeo.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://ep1.adtrafficquality.google https://geekhuashan-pageviews.geekhuashan.workers.dev; frame-src https://fundingchoicesmessages.google.com https://www.google.com https://googleads.g.doubleclick.net https://player.bilibili.com https://www.youtube-nocookie.com https://player.vimeo.com;">
 {{- end }}
 
 {{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
@@ -69,18 +69,6 @@
 <link rel="dns-prefetch" href="//www.google-analytics.com">
 <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
 <link rel="dns-prefetch" href="//static.cloudflareinsights.com">
-
-{{- /* 字体优化：preconnect + 延迟加载 */ -}}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-{{- /* 使用 font-display=swap 确保文本立即可见 */ -}}
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap"
-    media="print" onload="this.media='all'">
-<noscript>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap">
-</noscript>
 
 {{- /* 预加载 LCP 图片以优化加载性能 */ -}}
 {{- if .IsHome }}
@@ -246,7 +234,6 @@ resources.Minify }}
 
 {{- /* Misc */}}
 {{- if hugo.IsProduction | or (eq site.Params.env "production") }}
-{{- template "_internal/google_analytics.html" . }}
 {{- partial "templates/opengraph.html" . }}
 {{- partial "templates/twitter_cards.html" . }}
 {{- partial "templates/schema_json.html" . }}
